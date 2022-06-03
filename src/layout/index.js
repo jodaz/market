@@ -5,7 +5,14 @@ import Drawer from './Drawer'
 const Layout = ({ children }) => (
     <Box display="flex">
         <Drawer />
-        {children}
+        <Box sx={{
+            display: 'flex',
+            marginTop: '5rem',
+            padding: '1rem',
+            width: '100%'
+        }}>
+            {children}
+        </Box>
     </Box>
 )
 

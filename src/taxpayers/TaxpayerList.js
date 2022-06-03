@@ -17,7 +17,7 @@ const headCells = [
     }
 ];
 
-const ItemList = () => {
+const TaxpayerList = () => {
     const isSmall = useMediaQuery(theme =>
         theme.breakpoints.down('sm')
     )
@@ -27,7 +27,7 @@ const ItemList = () => {
         error,
         data,
         hasMore
-    } = useFetch('/items', {
+    } = useFetch('/taxpayers', {
         perPage: 10,
         page: 1,
         filter: filter
@@ -73,4 +73,4 @@ const ItemList = () => {
     )
 }
 
-export default ItemList
+export default TaxpayerList

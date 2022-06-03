@@ -10,6 +10,7 @@ import Dashboard from './dashboard'
 import ItemsList from './items/ItemList'
 import ItemEdit from './items/ItemEdit'
 import ItemCreate from './items/ItemCreate'
+import TaxpayerList from './taxpayers/TaxpayerList'
 
 function App() {
     return (
@@ -40,6 +41,15 @@ function App() {
                     element={
                         <Layout>
                             <ItemsList />
+                        </Layout>
+                    }
+                />
+
+                <Route
+                    path="/taxpayers"
+                    element={
+                        <Layout>
+                            <TaxpayerList />
                         </Layout>
                     }
                 />
