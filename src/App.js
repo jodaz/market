@@ -1,25 +1,69 @@
-import logo from './logo.svg';
 import './App.css';
+import { Routes, Route } from "react-router-dom"
+import Login from './auth/Login'
+import { ThemeProvider } from '@mui/material/styles';
+import theme from './theme'
+import Layout from './layout'
+import Dashboard from './dashboard'
+
+// Pages
+import ItemsList from './items/ItemList'
+import ItemEdit from './items/ItemEdit'
+import ItemCreate from './items/ItemCreate'
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    return (
+        <ThemeProvider theme={theme}>
+            <Routes>
+                <Route path='/login' element={<Login />} />
+
+                <Route
+                    path="/"
+                    element={
+                        <Layout>
+                            <Dashboard />
+                        </Layout>
+                    }
+                />
+
+                <Route
+                    path="/"
+                    element={
+                        <Layout>
+                            <Dashboard />
+                        </Layout>
+                    }
+                />
+
+                <Route
+                    path="/items"
+                    element={
+                        <Layout>
+                            <ItemsList />
+                        </Layout>
+                    }
+                />
+
+                <Route
+                    path="/items/:id"
+                    element={
+                        <Layout>
+                            <ItemEdit />
+                        </Layout>
+                    }
+                />
+
+                <Route
+                    path="/items/create"
+                    element={
+                        <Layout>
+                            <ItemCreate />
+                        </Layout>
+                    }
+                />
+            </Routes>
+        </ThemeProvider>
+    );
 }
 
 export default App;
