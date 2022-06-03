@@ -55,7 +55,7 @@ function App() {
                 />
 
                 <Route
-                    path="/items/:id"
+                    path="/items/:id/edit"
                     element={
                         <Layout>
                             <ItemEdit />

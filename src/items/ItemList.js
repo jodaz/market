@@ -5,7 +5,7 @@ import Button from '@mui/material/Button'
 import SearchIcon from '@mui/icons-material/Search';
 import { useMediaQuery } from '@mui/material'
 import useFetch from '../hooks/useFetch'
-import Table from '../components/Table'
+import Table from './Table'
 import LinkBehavior from '../components/LinkBehavior';
 
 const headCells = [
@@ -14,6 +14,12 @@ const headCells = [
         numeric: false,
         disablePadding: true,
         label: 'Nombre',
+    },
+    { 
+        id: 'actions',
+        numeric: false,
+        disablePadding: true,
+        label: 'Acciones',
     }
 ];
 
