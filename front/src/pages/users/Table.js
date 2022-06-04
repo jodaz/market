@@ -8,9 +8,9 @@ import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import Checkbox from '@mui/material/Checkbox';
-import EditButton from '../components/EditButton'
-import TableHead from '../components/TableHead'
-import TableToolbar from '../components/TableToolbar'
+import EditButton from '../../components/EditButton'
+import TableHead from '../../components/TableHead'
+import TableToolbar from '../../components/TableToolbar'
 
 function descendingComparator(a, b, orderBy) {
     if (b[orderBy] < a[orderBy]) {

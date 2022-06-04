@@ -8,9 +8,9 @@ import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import Checkbox from '@mui/material/Checkbox';
-import EditButton from '../components/EditButton'
-import TableHead from '../components/TableHead'
-import TableToolbar from '../components/TableToolbar'
+import EditButton from '../../components/EditButton'
+import TableHead from '../../components/TableHead'
+import TableToolbar from '../../components/TableToolbar'
 
 function descendingComparator(a, b, orderBy) {
     if (b[orderBy] < a[orderBy]) {
@@ -152,13 +152,13 @@ export default function EnhancedTable({
                                         padding="none"
                                         width='100%'
                                     >
-                                        {row.name}
+                                        {row.names}
                                     </TableCell>
                                     <TableCell
                                         scope="row"
                                         align='right'
                                     >
-                                        <EditButton href={`/items/${row.id}/edit`} />
+                                        <EditButton href={`/users/${row.id}/edit`} />
                                     </TableCell>
                                 </TableRow>
                             );

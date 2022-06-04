@@ -5,7 +5,7 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import { Link as RouterLink } from 'react-router-dom';
 
 const ListItemLink = props => {
-    const { icon, primary, to } = props;
+    const { icon, primary, to, ...rest } = props;
   
     const renderLink = React.useMemo(
         () =>
@@ -22,7 +22,7 @@ const ListItemLink = props => {
   
     return (
         <li>
-            <ListItem button component={renderLink}>
+            <ListItem button component={renderLink} {...rest}>
                 {icon ? <ListItemIcon>{icon}</ListItemIcon> : null}
                 <ListItemText primary={primary} />
             </ListItem>

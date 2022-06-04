@@ -5,6 +5,8 @@ import { Form } from 'react-final-form'
 import Button from '@mui/material/Button'
 import PropTypes from 'prop-types'
 import merge from 'lodash/merge';
+import useMediaQuery from '@mui/material/useMediaQuery';
+import { AdminContext } from '../context/AdminContext'
 
 const getFormInitialValues = (
     initialValues,
@@ -39,7 +41,6 @@ function getValues(values, record) {
 }
 
 const BaseForm = ({
-    formName,
     children,
     saveButtonLabel,
     loading,
@@ -50,17 +51,23 @@ const BaseForm = ({
     record,
     initialValues,
     defaultValue,
+    title,
     ...rest
 }) => {
+    const { dispatch } = React.useContext(AdminContext)
+    const matches = useMediaQuery((theme) => theme.breakpoints.down('sm'));
+
     const finalInitialValues = React.useMemo(
         () => getFormInitialValues(initialValues, defaultValue, record),
         [JSON.stringify({ initialValues, defaultValue, record })] // eslint-disable-line
     );
+    React.useEffect(() => {
+        dispatch({ type: 'SET_TITLE', payload: title })
+    }, [title])
 
     return (
-        <Box component='div'>
-            { formName && <Box component='h5'>{formName}</Box> }
-            <Box component='div' paddingTop='2rem'>
+        <Box component='div' width='100%'>
+            <Box component='div' paddingTop='2rem'  width='100%'>
                 <Form
                     onSubmit={save}
                     validate={validate}
@@ -68,7 +75,11 @@ const BaseForm = ({
                     {...rest}
                     render={ ({ handleSubmit }) => (
                         <form id="exampleForm" onSubmit={handleSubmit}>
-                            <Box maxWidth="90em">
+                            <Box sx={{
+                                maxWidth: '90rem',
+                                backgroundColor: theme => theme.palette.secondary.main,
+                                padding: '1rem 2rem'
+                            }}>
                                 <Grid container spacing={1}>
                                     {
                                         React.Children.map(children, child =>
@@ -77,25 +88,30 @@ const BaseForm = ({
                                             })
                                         )
                                     }
-                                    {!noButton && (
-                                        <Grid container>
-                                            <Grid item xs={12} sm={12} md={4} lg={3}>
-                                                <Button
-                                                    disabled={loading}
-                                                    onClick={event => {
-                                                        if (event) {
-                                                            event.preventDefault();
-                                                            handleSubmit();
-                                                        }
-                                                    }}
-                                                    unresponsive={unresponsive}
-                                                    type="submit"
-                                                >
-                                                    {saveButtonLabel}
-                                                </Button>
-                                            </Grid>
-                                        </Grid>
-                                    )}
+                                    <Box sx={{
+                                        display: 'flex',
+                                        width: '100%',
+                                        justifyContent: 'flex-end',
+                                        padding: '1rem 0.5rem'
+                                    }}>
+                                        {!noButton && (
+                                            <Button
+                                                disabled={loading}
+                                                onClick={event => {
+                                                    if (event) {
+                                                        event.preventDefault();
+                                                        handleSubmit();
+                                                    }
+                                                }}
+                                                type="submit"
+                                                color='primary'
+                                                variant="contained"
+                                                fullWidth={matches}
+                                            >
+                                                {saveButtonLabel}
+                                            </Button>
+                                        )}
+                                    </Box>
                                 </Grid>
                             </Box>
                         </form>
@@ -107,7 +123,6 @@ const BaseForm = ({
 }
 
 BaseForm.propTypes = {
-    formName: PropTypes.string,
     saveButtonLabel: PropTypes.string,
     disabled: PropTypes.bool
 }

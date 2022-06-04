@@ -1,9 +1,9 @@
 import * as React from 'react'
 import { validateItem } from './itemValidations';
-import BaseForm from '../components/BaseForm'
-import InputContainer from '../components/InputContainer'
-import TextInput from '../components/TextInput'
-import axios from '../api'
+import BaseForm from '../../components/BaseForm'
+import InputContainer from '../../components/InputContainer'
+import TextInput from '../../components/TextInput'
+import axios from '../../api'
 import { useNavigate } from 'react-router-dom'
 
 const ItemCreate = props => {
@@ -40,7 +40,7 @@ const ItemCreate = props => {
             save={save}
             validate={validateItem}
             loading={loading}
-            formName='Agregar rubro'
+            title='Agregar rubro'
             unresponsive
         >
             <InputContainer label='Nombre'>

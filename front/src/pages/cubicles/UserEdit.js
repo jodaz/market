@@ -1,12 +1,12 @@
 import * as React from 'react'
 import { validateItem } from './userValidations';
-import BaseForm from '../components/BaseForm'
-import InputContainer from '../components/InputContainer'
+import BaseForm from '../../components/BaseForm'
+import InputContainer from '../../components/InputContainer'
 import { useParams } from 'react-router-dom'
-import TextInput from '../components/TextInput'
+import TextInput from '../../components/TextInput'
 import { useNavigate } from 'react-router-dom'
-import axios from '../api'
-import PasswordInput from '../components/PasswordInput'
+import axios from '../../api'
+import PasswordInput from '../../components/PasswordInput'
 
 const ItemEdit = props => {
     const { id } = useParams();
@@ -55,7 +55,7 @@ const ItemEdit = props => {
             record={record}
             saveButtonLabel='Actualizar'
             loading={loading}
-            formName="Editar Rubro"
+            title="Editar Rubro"
         >
             <InputContainer label='Cédula de identidad'>
                 <TextInput

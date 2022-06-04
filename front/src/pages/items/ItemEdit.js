@@ -1,12 +1,11 @@
 import * as React from 'react'
-import { validateItem } from './userValidations';
-import BaseForm from '../components/BaseForm'
-import InputContainer from '../components/InputContainer'
+import { validateItem } from './itemValidations';
+import BaseForm from '../../components/BaseForm'
+import InputContainer from '../../components/InputContainer'
 import { useParams } from 'react-router-dom'
-import TextInput from '../components/TextInput'
+import TextInput from '../../components/TextInput'
 import { useNavigate } from 'react-router-dom'
-import axios from '../api'
-import PasswordInput from '../components/PasswordInput'
+import axios from '../../api'
 
 const ItemEdit = props => {
     const { id } = useParams();
@@ -55,40 +54,12 @@ const ItemEdit = props => {
             record={record}
             saveButtonLabel='Actualizar'
             loading={loading}
-            formName="Editar Rubro"
+            title="Editar Rubro"
         >
-            <InputContainer label='Cédula de identidad'>
+            <InputContainer label='Nombre'>
                 <TextInput
-                    name="identity_card"
-                    placeholder="Cédula de identidad"
-                    fullWidth
-                />
-            </InputContainer>
-            <InputContainer label='Nombre(s)'>
-                <TextInput
-                    name="names"
+                    name="name"
                     placeholder="Nombre"
-                    fullWidth
-                />
-            </InputContainer>
-            <InputContainer label='Apellido(s)'>
-                <TextInput
-                    name="surnames"
-                    placeholder="Apellido(s)"
-                    fullWidth
-                />
-            </InputContainer>
-            <InputContainer label='Login'>
-                <TextInput
-                    name="login"
-                    placeholder="Nombre de usuario"
-                    fullWidth
-                />
-            </InputContainer>
-            <InputContainer label='Contraseña'>
-                <PasswordInput
-                    name="password"
-                    placeholder="Contraseña"
                     fullWidth
                 />
             </InputContainer>

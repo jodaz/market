@@ -1,10 +1,10 @@
 import * as React from 'react'
 import { validateItem } from './userValidations';
-import BaseForm from '../components/BaseForm'
-import InputContainer from '../components/InputContainer'
-import PasswordInput from '../components/PasswordInput'
-import TextInput from '../components/TextInput'
-import axios from '../api'
+import BaseForm from '../../components/BaseForm'
+import InputContainer from '../../components/InputContainer'
+import PasswordInput from '../../components/PasswordInput'
+import TextInput from '../../components/TextInput'
+import axios from '../../api'
 import { useNavigate } from 'react-router-dom'
 
 const UserCreate = () => {
@@ -41,7 +41,7 @@ const UserCreate = () => {
             save={save}
             validate={validateItem}
             loading={loading}
-            formName='Agregar usuario'
+            title='Agregar usuario'
             unresponsive
         >
             <InputContainer label='Cédula de identidad'>

@@ -12,9 +12,26 @@ class CubicleController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $query = Cubicle::query();
+        $results = $request->perPage;
+        $sort = $request->sort;
+        $order = $request->order;
+
+        if ($request->has('filter')) {
+            $filters = $request->filter;
+
+            if (array_key_exists('num', $filters)) {
+                $query->whereLike('num', $filters['num']);
+            }
+        }
+
+        if ($sort && $order) {
+            $query->orderBy($sort, $order);
+        }
+
+        return $query->paginate($results);
     }
 
     /**

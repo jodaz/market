@@ -4,9 +4,10 @@ import TextField from '@mui/material/TextField'
 import Button from '@mui/material/Button'
 import SearchIcon from '@mui/icons-material/Search';
 import { useMediaQuery } from '@mui/material'
-import useFetch from '../hooks/useFetch'
+import useFetch from '../../hooks/useFetch'
 import Table from './Table'
-import LinkBehavior from '../components/LinkBehavior';
+import LinkBehavior from '../../components/LinkBehavior';
+import ListContainer from '../../components/ListContainer';
 
 const headCells = [
     { 
@@ -33,7 +34,7 @@ const ItemList = () => {
         error,
         data,
         hasMore
-    } = useFetch('/items', {
+    } = useFetch('/cubicles', {
         perPage: 10,
         page: 1,
         filter: filter
@@ -50,7 +51,7 @@ const ItemList = () => {
     }
 
     return (
-        <Box display='flex' flexDirection='column' width='100%'>
+        <ListContainer title='Cubículos'>
             <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
                 <Box width={isSmall ? '100%' : '40%'}>
                     <TextField
@@ -67,7 +68,7 @@ const ItemList = () => {
                     />
                 </Box>
                 <Box>
-                    <Button color="primary" component={LinkBehavior} to="/items/create">
+                    <Button color="primary" component={LinkBehavior} to="/users/create">
                         Crear
                     </Button>
                 </Box>
@@ -75,7 +76,7 @@ const ItemList = () => {
             <Box>
                 <Table headCells={headCells} data={data} />
             </Box>
-        </Box>
+        </ListContainer>
     )
 }
 

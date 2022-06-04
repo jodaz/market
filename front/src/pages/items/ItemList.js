@@ -1,12 +1,12 @@
 import * as React from 'react'
 import Box from '@mui/material/Box'
 import TextField from '@mui/material/TextField'
-import Button from '@mui/material/Button'
 import SearchIcon from '@mui/icons-material/Search';
 import { useMediaQuery } from '@mui/material'
-import useFetch from '../hooks/useFetch'
+import useFetch from '../../hooks/useFetch'
 import Table from './Table'
-import LinkBehavior from '../components/LinkBehavior';
+import ButtonLink from '../../components/ButtonLink'
+import ListContainer from '../../components/ListContainer';
 
 const headCells = [
     { 
@@ -33,7 +33,7 @@ const ItemList = () => {
         error,
         data,
         hasMore
-    } = useFetch('/users', {
+    } = useFetch('/items', {
         perPage: 10,
         page: 1,
         filter: filter
@@ -50,7 +50,7 @@ const ItemList = () => {
     }
 
     return (
-        <Box display='flex' flexDirection='column' width='100%'>
+        <ListContainer title="Rubros">
             <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
                 <Box width={isSmall ? '100%' : '40%'}>
                     <TextField
@@ -67,15 +67,17 @@ const ItemList = () => {
                     />
                 </Box>
                 <Box>
-                    <Button color="primary" component={LinkBehavior} to="/users/create">
-                        Crear
-                    </Button>
+                    <ButtonLink
+                        color="primary"
+                        variant="contained"
+                        to="/items/create"
+                    />
                 </Box>
             </Box>
             <Box>
                 <Table headCells={headCells} data={data} />
             </Box>
-        </Box>
+        </ListContainer>
     )
 }
 

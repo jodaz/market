@@ -1,12 +1,12 @@
 import * as React from 'react'
 import Box from '@mui/material/Box'
 import TextField from '@mui/material/TextField'
-import Button from '@mui/material/Button'
 import SearchIcon from '@mui/icons-material/Search';
 import { useMediaQuery } from '@mui/material'
-import useFetch from '../hooks/useFetch'
-import Table from '../components/Table'
-import LinkBehavior from '../components/LinkBehavior';
+import useFetch from '../../hooks/useFetch'
+import Table from '../../components/Table'
+import ButtonLink from '../../components/ButtonLink'
+import ListContainer from '../../components/ListContainer';
 
 const headCells = [
     { 
@@ -44,7 +44,7 @@ const TaxpayerList = () => {
     }
 
     return (
-        <Box display='flex' flexDirection='column' width='100%'>
+        <ListContainer title="Contribuyentes">
             <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
                 <Box width={isSmall ? '100%' : '40%'}>
                     <TextField
@@ -61,15 +61,17 @@ const TaxpayerList = () => {
                     />
                 </Box>
                 <Box>
-                    <Button color="primary" component={LinkBehavior} to="/items/create">
-                        Crear
-                    </Button>
+                    <ButtonLink
+                        color="primary"
+                        variant="contained"
+                        to="/taxpayers/create"
+                    />
                 </Box>
             </Box>
             <Box>
                 <Table headCells={headCells} data={data} />
             </Box>
-        </Box>
+        </ListContainer>
     )
 }
 
