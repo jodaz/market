@@ -6,7 +6,7 @@ import TextInput from '../components/TextInput'
 import axios from '../api'
 import { useNavigate } from 'react-router-dom'
 
-const ItemCreate = props => {
+const TaxpayerCreate = () => {
     const [loading, setLoading] = React.useState(false)
     const [loaded, setLoaded] = React.useState(false)
     const navigate = useNavigate()
@@ -15,7 +15,7 @@ const ItemCreate = props => {
         setLoading(true)
 
         try {
-            const { data } = await axios.post('/items', values)
+            const { data } = await axios.post('/users', values)
 
             if (data) {
                 setLoaded(true)
@@ -31,7 +31,7 @@ const ItemCreate = props => {
 
     React.useEffect(() => {
         if (loaded) {
-            navigate('/items')
+            navigate('/users')
         }
     }, [loaded])
 
@@ -40,7 +40,7 @@ const ItemCreate = props => {
             save={save}
             validate={validateItem}
             loading={loading}
-            formName='Agregar rubro'
+            formName='Agregar usuario'
             unresponsive
         >
             <InputContainer label='Nombre'>
@@ -54,9 +54,4 @@ const ItemCreate = props => {
     )
 }
 
-ItemCreate.defaultProps = {
-    basePath: 'items',
-    resource: 'items'
-}
-
-export default ItemCreate
+export default TaxpayerCreate

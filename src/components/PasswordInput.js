@@ -20,7 +20,6 @@ const PasswordInput = ({
     return (
         <TextInput
             type={visible ? 'text' : 'password'}
-            size="small"
             InputProps={{
                 endAdornment: (
                     <InputAdornment position="end">

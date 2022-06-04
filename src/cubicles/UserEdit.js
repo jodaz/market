@@ -1,11 +1,12 @@
 import * as React from 'react'
-import { validateItem } from './itemValidations';
+import { validateItem } from './userValidations';
 import BaseForm from '../components/BaseForm'
 import InputContainer from '../components/InputContainer'
 import { useParams } from 'react-router-dom'
 import TextInput from '../components/TextInput'
 import { useNavigate } from 'react-router-dom'
 import axios from '../api'
+import PasswordInput from '../components/PasswordInput'
 
 const ItemEdit = props => {
     const { id } = useParams();
@@ -56,10 +57,38 @@ const ItemEdit = props => {
             loading={loading}
             formName="Editar Rubro"
         >
-            <InputContainer label='Nombre'>
+            <InputContainer label='Cédula de identidad'>
                 <TextInput
-                    name="name"
+                    name="identity_card"
+                    placeholder="Cédula de identidad"
+                    fullWidth
+                />
+            </InputContainer>
+            <InputContainer label='Nombre(s)'>
+                <TextInput
+                    name="names"
                     placeholder="Nombre"
+                    fullWidth
+                />
+            </InputContainer>
+            <InputContainer label='Apellido(s)'>
+                <TextInput
+                    name="surnames"
+                    placeholder="Apellido(s)"
+                    fullWidth
+                />
+            </InputContainer>
+            <InputContainer label='Login'>
+                <TextInput
+                    name="login"
+                    placeholder="Nombre de usuario"
+                    fullWidth
+                />
+            </InputContainer>
+            <InputContainer label='Contraseña'>
+                <PasswordInput
+                    name="password"
+                    placeholder="Contraseña"
                     fullWidth
                 />
             </InputContainer>

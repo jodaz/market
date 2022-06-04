@@ -11,13 +11,15 @@ import ItemsList from './items/ItemList'
 import ItemEdit from './items/ItemEdit'
 import ItemCreate from './items/ItemCreate'
 import TaxpayerList from './taxpayers/TaxpayerList'
+import UserList from './users/UserList'
+import UserCreate from './users/UserCreate'
+import UserEdit from './users/UserEdit'
 
 function App() {
     return (
         <ThemeProvider theme={theme}>
             <Routes>
                 <Route path='/login' element={<Login />} />
-
                 <Route
                     path="/"
                     element={
@@ -26,7 +28,6 @@ function App() {
                         </Layout>
                     }
                 />
-
                 <Route
                     path="/"
                     element={
@@ -35,7 +36,6 @@ function App() {
                         </Layout>
                     }
                 />
-
                 <Route
                     path="/items"
                     element={
@@ -44,7 +44,6 @@ function App() {
                         </Layout>
                     }
                 />
-
                 <Route
                     path="/taxpayers"
                     element={
@@ -53,7 +52,30 @@ function App() {
                         </Layout>
                     }
                 />
-
+                <Route
+                    path="/users"
+                    element={
+                        <Layout>
+                            <UserList />
+                        </Layout>
+                    }
+                />
+                <Route
+                    path="/users/:id/edit"
+                    element={
+                        <Layout>
+                            <UserEdit />
+                        </Layout>
+                    }
+                />
+                <Route
+                    path="/users/create"
+                    element={
+                        <Layout>
+                            <UserCreate />
+                        </Layout>
+                    }
+                />
                 <Route
                     path="/items/:id/edit"
                     element={
@@ -62,7 +84,6 @@ function App() {
                         </Layout>
                     }
                 />
-
                 <Route
                     path="/items/create"
                     element={
