@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Users\UsersCreateFormRequest;
-use App\Http\Requests\Users\UpdatePassword;
+use App\Http\Requests\UsersCreateFormRequest;
+use App\Http\Requests\UpdatePassword;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Redirect;
@@ -70,17 +70,16 @@ class UserController extends Controller
      */
     public function store(UsersCreateFormRequest $request)
     {
-        $create = new User([
+        $create = User::create([
             'identity_card' => $request->input('identity_card'),
             'names' => $request->input('names'),
             'surnames' => $request->input('surnames'),
             'login' => $request->input('login'),
             'password' => bcrypt($request->input('password')),
-            'phone' => $request->input('phone'),
-            'avatar'=> $request->input('avatar')
+            'phone' => $request->input('phone')
         ]);
 
-        return redirect()->route('users.index')->withSuccess('¡Usuario agregado!');
+        return $create;
     }
 
     /**
@@ -91,33 +90,7 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
-        //
-    }
-
-    public function getUser(Request $request)
-    {
-        $user = $request->user();
-
-        return response()->json($user);
-    }
-
-    public function report($query)
-    {
-        // Prepare pdf
-        $models = $query->get();
-        $title = "Listado de Usuarios";
-
-        $pdf = PDF::LoadView('pdf.reports.users', compact([
-            'models',
-            'title'
-        ]));
-
-        return $pdf->download('usuarios.pdf');
-    }
-
-    public function showChangePassword()
-    {
-        return view('modules.users.change-password');
+        return $user;
     }
 
     public function updatePassword(UpdatePassword $request)
@@ -152,24 +125,9 @@ class UserController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        $data = [
-            'identity_card' => $request->identity_card,
-            'names' => $request->names,
-            'surnames' => $request->surnames,
-            'login' => $request->login
-        ];
+        $user->update($request->all());
 
-        $user->roles()->sync($request->roles_ids);
-
-        if ($request->password != NULL) {
-            $data->password = bcrypt($request->password);
-        }
-
-        $user->update($data);
-        $user->roles()->sync($request->roles_ids);
-
-        return redirect()->route('users.index')
-            ->withSuccess('¡Usuario actualizado!');
+        return $user;
     }
 
 

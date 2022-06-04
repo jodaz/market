@@ -8,7 +8,7 @@ import { useNavigate } from 'react-router-dom'
 import axios from '../../api'
 import PasswordInput from '../../components/PasswordInput'
 
-const ItemEdit = props => {
+const UserEdit = props => {
     const { id } = useParams();
     const [loading, setLoading] = React.useState(false)
     const [loaded, setLoaded] = React.useState(false)
@@ -18,7 +18,7 @@ const ItemEdit = props => {
     const save = React.useCallback(async (values) => {
         setLoading(true)
         try {
-            const { data } = await axios.put(`/items/${id}`, values)
+            const { data } = await axios.put(`/users/${id}`, values)
 
             if (data) {
                 setLoaded(true)
@@ -33,14 +33,14 @@ const ItemEdit = props => {
 
 
     const fetchRecord = React.useCallback(async () => {
-        const { data } = await axios.get(`/items/${id}`);
-
+        const { data } = await axios.get(`/users/${id}`);
+        console.log(data)
         setRecord(data);
     }, []);
 
     React.useEffect(() => {
         if (loaded) {
-            navigate('/items')
+            navigate('/users')
         }
     }, [loaded])
 
@@ -96,9 +96,4 @@ const ItemEdit = props => {
     )
 }
 
-ItemEdit.defaultProps = {
-    basePath: 'items',
-    resource: 'items'
-}
-
-export default ItemEdit
+export default UserEdit
