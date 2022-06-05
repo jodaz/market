@@ -62,4 +62,16 @@ async function loginUser(dispatch, values) {
     }
 }
 
-export { useAuth, AuthProvider, loginUser }
+async function logout(dispatch) {
+    try {
+        dispatch({ type: 'LOGOUT' })
+
+        await localStorage.removeItem(CONFIG_NAMES.AUTH_TOKEN)
+        await localStorage.removeItem(CONFIG_NAMES.USER);
+    } catch (e) {
+        console.log(e);
+    }
+}
+
+
+export { useAuth, AuthProvider, loginUser, logout }

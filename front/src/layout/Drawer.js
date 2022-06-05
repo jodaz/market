@@ -12,6 +12,8 @@ import Typography from '@mui/material/Typography';
 import routes from '../routes'
 import ListItemLink from '../components/ListItemLink';
 import { AdminContext } from '../context/AdminContext'
+import AccountMenu from './AccountMenu'
+import LogoutButton from '../components/LogoutButton';
 
 const drawerWidth = 240;
 
@@ -36,6 +38,7 @@ function ResponsiveDrawer(props) {
                         key={index}
                     />
                 ))}
+                <LogoutButton />
             </List>
             <Divider />
         </div>
@@ -52,18 +55,21 @@ function ResponsiveDrawer(props) {
                 }}
             >
                 <Toolbar>
-                <IconButton
-                    color="inherit"
-                    aria-label="open drawer"
-                    edge="start"
-                    onClick={handleDrawerToggle}
-                    sx={{ mr: 2, display: { sm: 'none' } }}
-                >
-                    <MenuIcon />
-                </IconButton>
-                <Typography variant="h6" noWrap component="div">
-                    {state.title}
-                </Typography>
+                    <IconButton
+                        color="inherit"
+                        aria-label="open drawer"
+                        edge="start"
+                        onClick={handleDrawerToggle}
+                        sx={{ mr: 2, display: { sm: 'none' } }}
+                    >
+                        <MenuIcon />
+                    </IconButton>
+                    <Typography variant="h6" noWrap component="div">
+                        {state.title}
+                    </Typography>
+                    <Box flex='1' justifyContent='flex-end' display='flex'>
+                        <AccountMenu />
+                    </Box>
                 </Toolbar>
             </AppBar>
             <Box

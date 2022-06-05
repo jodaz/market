@@ -28,6 +28,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::resource('/items', ItemController::class);
     Route::resource('/taxpayers', TaxpayerController::class);
     Route::resource('/cubicles', CubicleController::class);
+    Route::get('/logout', [AuthController::class, 'logout']);
 });
 
 Route::post('/login', [AuthController::class, 'login']);
