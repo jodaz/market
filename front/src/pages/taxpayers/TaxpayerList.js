@@ -4,7 +4,7 @@ import TextField from '@mui/material/TextField'
 import SearchIcon from '@mui/icons-material/Search';
 import { useMediaQuery } from '@mui/material'
 import useFetch from '../../hooks/useFetch'
-import Table from '../../components/Table'
+import Table from './Table'
 import ButtonLink from '../../components/ButtonLink'
 import ListContainer from '../../components/ListContainer';
 
@@ -14,6 +14,18 @@ const headCells = [
         numeric: false,
         disablePadding: true,
         label: 'Nombre',
+    },
+    { 
+        id: 'address',
+        numeric: false,
+        disablePadding: true,
+        label: 'Dirección',
+    },
+    { 
+        id: 'actions',
+        numeric: false,
+        disablePadding: true,
+        label: 'Acciones',
     }
 ];
 

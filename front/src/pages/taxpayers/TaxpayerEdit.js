@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { validateItem } from './itemValidations';
+import { validateItem } from './taxpayerValidations';
 import BaseForm from '../../components/BaseForm'
 import InputContainer from '../../components/InputContainer'
 import { useParams } from 'react-router-dom'
@@ -7,7 +7,7 @@ import TextInput from '../../components/TextInput'
 import { useNavigate } from 'react-router-dom'
 import axios from '../../api'
 
-const ItemEdit = () => {
+const UserEdit = props => {
     const { id } = useParams();
     const [loading, setLoading] = React.useState(false)
     const [loaded, setLoaded] = React.useState(false)
@@ -54,12 +54,40 @@ const ItemEdit = () => {
             record={record}
             saveButtonLabel='Actualizar'
             loading={loading}
-            title="Editar contribuyente"
+            title="Editar Rubro"
         >
-            <InputContainer label='Nombre'>
+            <InputContainer label='RIF'>
+                <TextInput
+                    name="rif"
+                    placeholder="RIF"
+                    fullWidth
+                />
+            </InputContainer>
+            <InputContainer label='Razón social'>
                 <TextInput
                     name="name"
-                    placeholder="Nombre"
+                    placeholder="Razón Social"
+                    fullWidth
+                />
+            </InputContainer>
+            <InputContainer label='Dirección'>
+                <TextInput
+                    name="address"
+                    placeholder="Dirección"
+                    fullWidth
+                />
+            </InputContainer>
+            <InputContainer label='Teléfono'>
+                <TextInput
+                    name="phone"
+                    placeholder="Teléfono"
+                    fullWidth
+                />
+            </InputContainer>
+            <InputContainer label='Correo electrónico'>
+                <TextInput
+                    name="email"
+                    placeholder="email@ejemplo.com"
                     fullWidth
                 />
             </InputContainer>
@@ -67,4 +95,4 @@ const ItemEdit = () => {
     )
 }
 
-export default ItemEdit
+export default UserEdit

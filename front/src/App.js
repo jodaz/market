@@ -14,6 +14,8 @@ import UserEdit from './pages/users/UserEdit'
 import CubicleList from './pages/cubicles/CubicleList'
 import Dashboard from './pages/dashboard'
 import Login from './pages/auth/Login'
+import TaxpayerCreate from './pages/taxpayers/TaxpayerCreate'
+import TaxpayerEdit from './pages/taxpayers/TaxpayerEdit'
 import { AdminProvider } from './context/AdminContext'
 
 function App() {
@@ -51,6 +53,22 @@ function App() {
                         element={
                             <Layout>
                                 <TaxpayerList />
+                            </Layout>
+                        }
+                    />
+                    <Route
+                        path="/taxpayers/:id/edit"
+                        element={
+                            <Layout>
+                                <TaxpayerEdit />
+                            </Layout>
+                        }
+                    />
+                    <Route
+                        path="/taxpayers/create"
+                        element={
+                            <Layout>
+                                <TaxpayerCreate />
                             </Layout>
                         }
                     />

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Taxpayer;
 use Illuminate\Http\Request;
 use App\Http\Requests\TaxpayersCreateRequest;
+use App\Http\Requests\TaxpayersUpdateRequest;
 // use PDF;
 
 class TaxpayerController extends Controller
@@ -94,7 +95,7 @@ class TaxpayerController extends Controller
      * @param  \App\Taxpayer  $taxpayer
      * @return \Illuminate\Http\Response
      */
-    public function update(TaxpayersCreateRequest $request, Taxpayer $taxpayer)
+    public function update(TaxpayersUpdateRequest $request, Taxpayer $taxpayer)
     {
         $taxpayer->update($request->all());
 
