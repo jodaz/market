@@ -8,7 +8,8 @@ import TextInput from '../../components/TextInput'
 import PasswordInput from '../../components/PasswordInput'
 import InputContainer from '../../components/InputContainer'
 import axios from '../../api'
-import { Link, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
+import { useAuth, loginUser } from '../../context/AuthContext'
 
 const validate = (values) => {
     const errors = {};
@@ -25,21 +26,18 @@ const validate = (values) => {
 };
 
 const Login = () => {
-    const [loading, setLoading] = React.useState(false);
     const navigate = useNavigate();
+    const { dispatch } = useAuth();
 
     const handleSubmit = React.useCallback(async (values) => {
-        setLoading(true)
-
-        return await axios.post(`${process.env.REACT_APP_API_DOMAIN}/login`, values)
+        return await axios.post('/login', values)
             .then(async (res) => {
-                await axios.get('/csrf-cookie')
-                await navigate('/', { replace: true });
+                const { data } = res
+                await axios.get('/csrf-cookie');
+                loginUser(dispatch, data)
 
-                setLoading(false);
+                await navigate('/');
             }).catch(err => {
-                setLoading(false);
-
                 if (err.response.status == 500) {
                     navigate('/error', { replace: true });
                 }
@@ -51,40 +49,73 @@ const Login = () => {
     }, [])
 
     return (
-        <Box component='div'>
-            <Form
-                onSubmit={handleSubmit}
-                validate={validate}
-                render={({ handleSubmit }) => (
-                    <form onSubmit={handleSubmit} noValidate>
-                        <Card>
-                            <div>
-                                <InputContainer label='Correo electrónico' md={12}>
-                                    <TextInput
-                                        name="login"
-                                        placeholder="Ingrese su nombre de usuario"
-                                        disabled={loading}
+        <Box sx={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            width: '100%',
+            height: '100%'
+        }}>
+            <Box
+                component='div'
+                sx={{
+                    maxWidth: '20rem',
+                    padding: '2rem',
+                    backgroundColor: theme => theme.palette.secondary.main,
+                    borderRadius: '6px',
+                }}
+            >
+                <Form
+                    onSubmit={handleSubmit}
+                    validate={validate}
+                    render={ ({ handleSubmit, submitting }) => (
+                        <form onSubmit={handleSubmit}>
+                            <Box
+                                height='15rem'
+                                display='flex'
+                                flexDirection='column'
+                                justifyContent='space-between'
+                            >
+                                <Box>
+                                    <InputContainer label='Correo electrónico' md={12}>
+                                        <TextInput
+                                            name="login"
+                                            placeholder="Ingrese su nombre de usuario"
+                                            disabled={submitting}
+                                            fullWidth
+                                        />
+                                    </InputContainer>
+                                    <InputContainer label='Contraseña' md={12}>
+                                        <PasswordInput
+                                            name="password"
+                                            placeholder="Ingrese su contraseña"
+                                            disabled={submitting}
+                                            fullWidth
+                                        />
+                                    </InputContainer>
+                                </Box>
+                                <Box paddingTop='1rem'>
+                                    <Button
+                                        disabled={submitting}
+                                        onClick={event => {
+                                            if (event) {
+                                                event.preventDefault();
+                                                handleSubmit();
+                                            }
+                                        }}
+                                        type="submit"
+                                        color='primary'
+                                        variant="contained"
                                         fullWidth
-                                    />
-                                </InputContainer>
-                                <InputContainer label='Contraseña' md={12}>
-                                    <PasswordInput
-                                        name="password"
-                                        placeholder="Ingrese su contraseña"
-                                        disabled={loading}
-                                        fullWidth
-                                    />
-                                </InputContainer>
-                                <CardActions>
-                                    <Button disabled={loading} unresponsive fullWidth onSubmit={handleSubmit}>
-                                        Iniciar sesión
+                                    >
+                                        Acceder
                                     </Button>
-                                </CardActions>
-                            </div>
-                        </Card>
-                    </form>
-                )}
-            />
+                                </Box>
+                            </Box>
+                        </form>
+                    )}
+                />
+            </Box>
         </Box>
     );
 };

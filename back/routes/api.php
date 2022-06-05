@@ -10,6 +10,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\TaxpayerController;
 use App\Http\Controllers\ItemController;
 use App\Http\Controllers\CubicleController;
+use App\Http\Controllers\AuthController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,11 +23,11 @@ use App\Http\Controllers\CubicleController;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+Route::middleware('auth:sanctum')->group(function () {
+    Route::resource('/users', UserController::class);
+    Route::resource('/items', ItemController::class);
+    Route::resource('/taxpayers', TaxpayerController::class);
+    Route::resource('/cubicles', CubicleController::class);
 });
 
-Route::resource('/users', UserController::class);
-Route::resource('/items', ItemController::class);
-Route::resource('/taxpayers', TaxpayerController::class);
-Route::resource('/cubicles', CubicleController::class);
+Route::post('/login', [AuthController::class, 'login']);
