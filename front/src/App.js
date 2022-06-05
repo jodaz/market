@@ -1,6 +1,8 @@
 import './App.css';
 import { Routes, Route } from "react-router-dom"
 import { ThemeProvider } from '@mui/material/styles';
+import { AdminProvider } from './context/AdminContext'
+import { AuthProvider } from './context/AuthContext'
 import theme from './theme'
 import Layout from './layout'
 // Pages
@@ -16,8 +18,7 @@ import Dashboard from './pages/dashboard'
 import Login from './pages/auth/Login'
 import TaxpayerCreate from './pages/taxpayers/TaxpayerCreate'
 import TaxpayerEdit from './pages/taxpayers/TaxpayerEdit'
-import { AdminProvider } from './context/AdminContext'
-import { AuthProvider } from './context/AuthContext'
+import Security from './pages/account/Security';
 
 function App() {
     return (
@@ -111,6 +112,14 @@ function App() {
                             element={
                                 <Layout>
                                     <ItemCreate />
+                                </Layout>
+                            }
+                        />
+                        <Route
+                            path="/security"
+                            element={
+                                <Layout>
+                                    <Security />
                                 </Layout>
                             }
                         />

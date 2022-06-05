@@ -5,7 +5,9 @@ import PropTypes from 'prop-types';
 
 const InputContainer = ({ children, label, md, xs, sm, ...rest }) => (
     <Grid item xs={xs} sm={sm} md={md}>
-        <InputLabel>{label}</InputLabel>
+        <InputLabel sx={{
+            color: theme => theme.palette.text.primary
+        }}>{label}</InputLabel>
         {React.cloneElement(children, rest)}
     </Grid>
 )

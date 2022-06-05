@@ -2,8 +2,7 @@ import * as React from 'react';
 import Box from '@mui/material/Box';
 import Avatar from '@mui/material/Avatar';
 import Menu from '@mui/material/Menu';
-import MenuItem from '@mui/material/MenuItem';
-import ListItemIcon from '@mui/material/ListItemIcon';
+import ListItemLink from '../components/ListItemLink';
 import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import LockIcon from '@mui/icons-material/Lock';
@@ -89,12 +88,11 @@ export default function AccountMenu() {
             transformOrigin={{ horizontal: 'right', vertical: 'top' }}
             anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
         >
-            <MenuItem>
-                <ListItemIcon>
-                    <LockIcon fontSize="small" />
-                </ListItemIcon>
-                Seguridad
-            </MenuItem>
+            <ListItemLink
+                primary='Seguridad'
+                to='/security'
+                icon={<LockIcon fontSize='small' />}
+            />
             <LogoutButton />
         </Menu>
         </React.Fragment>

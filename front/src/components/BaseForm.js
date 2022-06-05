@@ -73,7 +73,7 @@ const BaseForm = ({
                     validate={validate}
                     initialValues={finalInitialValues}
                     {...rest}
-                    render={ ({ handleSubmit }) => (
+                    render={ ({ handleSubmit, submitting }) => (
                         <form id="exampleForm" onSubmit={handleSubmit}>
                             <Box sx={{
                                 maxWidth: '90rem',
@@ -84,7 +84,7 @@ const BaseForm = ({
                                     {
                                         React.Children.map(children, child =>
                                             React.cloneElement(child, {
-                                                disabled: loading
+                                                disabled: loading || submitting
                                             })
                                         )
                                     }
