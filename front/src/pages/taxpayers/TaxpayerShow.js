@@ -8,8 +8,10 @@ import TextField from '../../components/TextField';
 import EmailIcon from '@mui/icons-material/Email';
 import LinkIconButton from '../../components/LinkIconButton';
 import LoadingIndicator from '../../components/LoadingIndicator'
+import { setTitle, useAdmin } from '../../context/AdminContext'
 
 const TaxpayerShow = props => {
+    const { dispatch } = useAdmin()
     const { id } = useParams();
     const [record, setRecord] = React.useState(null)
 
@@ -22,6 +24,12 @@ const TaxpayerShow = props => {
     React.useEffect(() => {
         fetchRecord()
     }, [])
+
+    React.useEffect(() => {
+        if (record) {
+            setTitle(dispatch, `Contribuyente #${record.id}`)
+        }
+    }, [record])
 
     if (!record) return <LoadingIndicator />;
 

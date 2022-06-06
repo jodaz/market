@@ -5,7 +5,7 @@ import { Form } from 'react-final-form'
 import Button from '@mui/material/Button'
 import PropTypes from 'prop-types'
 import useMediaQuery from '@mui/material/useMediaQuery';
-import { AdminContext } from '../context/AdminContext'
+import { setTitle, useAdmin } from '../context/AdminContext'
 
 const BaseForm = ({
     children,
@@ -21,11 +21,11 @@ const BaseForm = ({
     title,
     ...rest
 }) => {
-    const { dispatch } = React.useContext(AdminContext)
+    const { dispatch } = useAdmin()
     const matches = useMediaQuery((theme) => theme.breakpoints.down('sm'));
 
     React.useEffect(() => {
-        dispatch({ type: 'SET_TITLE', payload: title })
+        setTitle(dispatch, title)
     }, [title])
 
     return (

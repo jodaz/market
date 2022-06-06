@@ -1,13 +1,14 @@
 import * as React from 'react'
 import Box from '@mui/material/Box'
-import { AdminContext } from '../context/AdminContext'
+import { setTitle, useAdmin } from '../context/AdminContext'
 
 const ListContainer = ({ children, title }) => {
-    const { dispatch } = React.useContext(AdminContext)
+    const { dispatch } = useAdmin()
 
     React.useEffect(() => {
-        dispatch({ type: 'SET_TITLE', payload: title })
+        setTitle(dispatch, title)
     }, [title])
+
     
     return (
         <Box display='flex' flexDirection='column' width='100%'>

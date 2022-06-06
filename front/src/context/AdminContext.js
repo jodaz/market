@@ -33,4 +33,19 @@ function AdminProvider({ children }) {
     return <AdminContext.Provider value={value}>{children}</AdminContext.Provider>
 }
 
-export { AdminContext, AdminProvider }
+function useAdmin() {
+    const context = React.useContext(AdminContext)
+
+    if (context === undefined) {
+        throw new Error('useAdmin must be used within an AdminProvider')
+    }
+
+    return context
+}
+
+function setTitle(dispatch, title) {
+    console.log(title)
+    dispatch({ type: 'SET_TITLE', payload: title })
+}
+
+export { useAdmin, AdminProvider, setTitle }

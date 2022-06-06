@@ -11,7 +11,7 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import routes from '../routes'
 import ListItemLink from '../components/ListItemLink';
-import { AdminContext } from '../context/AdminContext'
+import { useAdmin } from '../context/AdminContext'
 import AccountMenu from './AccountMenu'
 import LogoutButton from '../components/LogoutButton';
 
@@ -19,7 +19,7 @@ const drawerWidth = 240;
 
 function ResponsiveDrawer(props) {
     const [mobileOpen, setMobileOpen] = React.useState(false);
-    const { state } = React.useContext(AdminContext)
+    const { state } = useAdmin()
 
     const handleDrawerToggle = () => {
         setMobileOpen(!mobileOpen);
