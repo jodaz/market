@@ -5,17 +5,19 @@ import InputContainer from '../../components/InputContainer'
 import TextInput from '../../components/TextInput'
 import axios from '../../api'
 import { useNavigate } from 'react-router-dom'
+import { useSnackbar } from 'notistack';
 
-const ItemCreate = props => {
-    const [loaded, setLoaded] = React.useState(false)
+const ItemCreate = () => {
     const navigate = useNavigate()
+    const { enqueueSnackbar } = useSnackbar();
 
     const save = React.useCallback(async (values) => {
         try {
             const { data } = await axios.post('/items', values)
 
             if (data) {
-                setLoaded(true)
+                navigate('/items')
+                enqueueSnackbar(`¡Ha registrado el rubro "${data.name}"`, { variant: 'success' });
             }
         } catch (error) {
             if (error.response.data.errors) {
@@ -23,12 +25,6 @@ const ItemCreate = props => {
             }
         }
     }, [])
-
-    React.useEffect(() => {
-        if (loaded) {
-            navigate('/items')
-        }
-    }, [loaded])
 
     return (
         <BaseForm

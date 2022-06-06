@@ -3,6 +3,7 @@ import BaseForm from '../../components/BaseForm'
 import InputContainer from '../../components/InputContainer'
 import PasswordInput from '../../components/PasswordInput'
 import axios from '../../api'
+import { useSnackbar } from 'notistack';
 
 const validateItem = (values) => {
     const errors = {}
@@ -27,9 +28,18 @@ const validateItem = (values) => {
 }
 
 const Security = () => {
+    const { enqueueSnackbar } = useSnackbar();
+
     const save = React.useCallback(async (values) => {
         try {
-            await axios.post('/security', values)
+            const { data } = await axios.post('/security', values)
+
+            if (data) {
+                enqueueSnackbar(
+                    `¡Ha actualizado su contraseña!"`, 
+                    { variant: 'success' }
+                );
+            }
         } catch (error) {
             if (error.response.data.errors) {
                 return error.response.data.errors;

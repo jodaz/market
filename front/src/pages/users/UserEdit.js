@@ -7,28 +7,30 @@ import TextInput from '../../components/TextInput'
 import { useNavigate } from 'react-router-dom'
 import axios from '../../api'
 import PasswordInput from '../../components/PasswordInput'
+import { useSnackbar } from 'notistack';
 
-const UserEdit = props => {
+const UserEdit = () => {
     const { id } = useParams();
-    const [loading, setLoading] = React.useState(false)
-    const [loaded, setLoaded] = React.useState(false)
     const [record, setRecord] = React.useState(null)
     const navigate = useNavigate()
+    const { enqueueSnackbar } = useSnackbar();
 
     const save = React.useCallback(async (values) => {
-        setLoading(true)
         try {
             const { data } = await axios.put(`/users/${id}`, values)
 
             if (data) {
-                setLoaded(true)
+                navigate('/users')
+                enqueueSnackbar(
+                    `¡Ha actualizado el usuario "${data.login}"`, 
+                    { variant: 'success' }
+                );
             }
         } catch (error) {
             if (error.response.data.errors) {
                 return error.response.data.errors;
             }
         }
-        setLoading(false)
     }, [id])
 
 
@@ -39,14 +41,10 @@ const UserEdit = props => {
     }, []);
 
     React.useEffect(() => {
-        if (loaded) {
-            navigate('/users')
-        }
-    }, [loaded])
-
-    React.useEffect(() => {
         fetchRecord()
     }, [])
+
+    if (!record) return null;
 
     return (
         <BaseForm
@@ -54,8 +52,7 @@ const UserEdit = props => {
             validate={validateItem}
             record={record}
             saveButtonLabel='Actualizar'
-            loading={loading}
-            title="Editar Rubro"
+            title={`Editando usuario #${record.id}`}
         >
             <InputContainer label='Cédula de identidad'>
                 <TextInput

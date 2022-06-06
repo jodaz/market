@@ -6,30 +6,32 @@ import { useParams } from 'react-router-dom'
 import TextInput from '../../components/TextInput'
 import { useNavigate } from 'react-router-dom'
 import axios from '../../api'
+import { useSnackbar } from 'notistack';
+import { normalizePhone, normalizeRif } from './textFormatters';
 
-const TaxpayerEdit = props => {
+const TaxpayerEdit = () => {
     const { id } = useParams();
-    const [loading, setLoading] = React.useState(false)
-    const [loaded, setLoaded] = React.useState(false)
     const [record, setRecord] = React.useState(null)
     const navigate = useNavigate()
+    const { enqueueSnackbar } = useSnackbar();
 
     const save = React.useCallback(async (values) => {
-        setLoading(true)
         try {
             const { data } = await axios.put(`/taxpayers/${id}`, values)
 
             if (data) {
-                setLoaded(true)
+                navigate('/taxpayers')
+                enqueueSnackbar(
+                    `¡Ha actualizado el contribuyente "${data.name}"`,  
+                    { variant: 'success' }
+                );
             }
         } catch (error) {
             if (error.response.data.errors) {
                 return error.response.data.errors;
             }
         }
-        setLoading(false)
     }, [id])
-
 
     const fetchRecord = React.useCallback(async () => {
         const { data } = await axios.get(`/taxpayers/${id}`);
@@ -38,14 +40,10 @@ const TaxpayerEdit = props => {
     }, []);
 
     React.useEffect(() => {
-        if (loaded) {
-            navigate('/taxpayers')
-        }
-    }, [loaded])
-
-    React.useEffect(() => {
         fetchRecord()
     }, [])
+
+    if (!record) return null;
 
     return (
         <BaseForm
@@ -53,11 +51,11 @@ const TaxpayerEdit = props => {
             validate={validateItem}
             record={record}
             saveButtonLabel='Actualizar'
-            loading={loading}
-            title="Editar Rubro"
+            title={`Editando contribuyente #${record.id}`}
         >
             <InputContainer label='RIF'>
                 <TextInput
+                    parse={normalizeRif}
                     name="rif"
                     placeholder="RIF"
                     fullWidth
@@ -79,6 +77,7 @@ const TaxpayerEdit = props => {
             </InputContainer>
             <InputContainer label='Teléfono'>
                 <TextInput
+                    parse={normalizePhone}
                     name="phone"
                     placeholder="Teléfono"
                     fullWidth

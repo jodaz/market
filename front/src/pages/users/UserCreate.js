@@ -6,17 +6,22 @@ import PasswordInput from '../../components/PasswordInput'
 import TextInput from '../../components/TextInput'
 import axios from '../../api'
 import { useNavigate } from 'react-router-dom'
+import { useSnackbar } from 'notistack';
 
 const UserCreate = () => {
-    const [loaded, setLoaded] = React.useState(false)
     const navigate = useNavigate()
+    const { enqueueSnackbar } = useSnackbar();
 
     const save = React.useCallback(async (values) => {
         try {
             const { data } = await axios.post('/users', values)
 
             if (data) {
-                setLoaded(true)
+                navigate('/users')
+                enqueueSnackbar(
+                    `¡Ha registrado el usuario "${data.login}"`, 
+                    { variant: 'success' }
+                );
             }
         } catch (error) {
             if (error.response.data.errors) {
@@ -24,12 +29,6 @@ const UserCreate = () => {
             }
         }
     }, [])
-
-    React.useEffect(() => {
-        if (loaded) {
-            navigate('/users')
-        }
-    }, [loaded])
 
     return (
         <BaseForm
