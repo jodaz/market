@@ -10,8 +10,7 @@ const theme = createTheme({
             main: grey[100]
         },
         text: {
-            primary: blueGrey[900],
-            secondary: '#fff'
+            primary: blueGrey[900]
         }
     },
 });

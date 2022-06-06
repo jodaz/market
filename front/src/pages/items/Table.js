@@ -12,6 +12,8 @@ import LinkIconButton from '../../components/LinkIconButton'
 import TableHead from '../../components/TableHead'
 import TableToolbar from '../../components/TableToolbar'
 import DeleteButton from '../../components/DeleteButton'
+import { useSnackbar } from 'notistack';
+import axios from '../../api'
 
 function descendingComparator(a, b, orderBy) {
     if (b[orderBy] < a[orderBy]) {
@@ -51,6 +53,7 @@ export default function EnhancedTable({
     const [selected, setSelected] = React.useState([]);
     const [page, setPage] = React.useState(0);
     const [rowsPerPage, setRowsPerPage] = React.useState(5);
+    const { enqueueSnackbar } = useSnackbar();
 
     const handleRequestSort = (event, property) => {
         const isAsc = orderBy === property && order === 'asc';
@@ -101,6 +104,17 @@ export default function EnhancedTable({
     // Avoid a layout jump when reaching the last page with empty data.
     const emptyRows =
         page > 0 ? Math.max(0, (1 + page) * rowsPerPage - data.length) : 0;
+
+    const handleDelete = React.useCallback(async (values) => {
+        const { data } = await axios.delete(`/items/${values.id}`);
+
+        if (data) {
+            enqueueSnackbar(
+                `¡Ha eliminado el rubro "${data.name}"`, 
+                { variant: 'success' }
+            );
+        }
+    }, [])
 
     return (
         <Box sx={{ width: '100%' }}>
@@ -161,7 +175,10 @@ export default function EnhancedTable({
                                     >
                                         <Box sx={{ display: 'flex', justifyContent: 'center' }}>
                                             <LinkIconButton href={`/items/${row.id}/edit`} />
-                                            <DeleteButton />
+                                            <DeleteButton
+                                                title={`¿Está seguro que desea eliminar el rubro "${row.name}"?`}
+                                                onClick={() => handleDelete(row)}
+                                            />
                                         </Box>
                                     </TableCell>
                                 </TableRow>

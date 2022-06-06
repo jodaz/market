@@ -4,6 +4,7 @@ import { ThemeProvider } from '@mui/material/styles';
 import { AdminProvider } from './context/AdminContext'
 import { AuthProvider } from './context/AuthContext'
 import { SnackbarProvider } from 'notistack';
+import { ConfirmProvider } from 'material-ui-confirm';
 import theme from './theme'
 import Layout from './layout'
 // Pages
@@ -25,119 +26,121 @@ import Security from './pages/account/Security';
 function App() {
     return (
         <ThemeProvider theme={theme}>
-            <SnackbarProvider maxSnack={3}>
-                <AdminProvider>
-                    <AuthProvider>
-                        <Routes>
-                            <Route path='/login' element={<Login />} />
-                            <Route
-                                path="/"
-                                element={
-                                    <Layout>
-                                        <Dashboard />
-                                    </Layout>
-                                }
-                            />
-                            <Route
-                                path="/cubicles"
-                                element={
-                                    <Layout>
-                                        <CubicleList />
-                                    </Layout>
-                                }
-                            />
-                            <Route
-                                path="/items"
-                                element={
-                                    <Layout>
-                                        <ItemsList />
-                                    </Layout>
-                                }
-                            />
-                            <Route
-                                path="/taxpayers"
-                                element={
-                                    <Layout>
-                                        <TaxpayerList />
-                                    </Layout>
-                                }
-                            />
-                            <Route
-                                path="/taxpayers/:id"
-                                element={
-                                    <Layout>
-                                        <TaxpayerShow />
-                                    </Layout>
-                                }
-                            />
-                            <Route
-                                path="/taxpayers/:id/edit"
-                                element={
-                                    <Layout>
-                                        <TaxpayerEdit />
-                                    </Layout>
-                                }
-                            />
-                            <Route
-                                path="/taxpayers/create"
-                                element={
-                                    <Layout>
-                                        <TaxpayerCreate />
-                                    </Layout>
-                                }
-                            />
-                            <Route
-                                path="/users"
-                                element={
-                                    <Layout>
-                                        <UserList />
-                                    </Layout>
-                                }
-                            />
-                            <Route
-                                path="/users/:id/edit"
-                                element={
-                                    <Layout>
-                                        <UserEdit />
-                                    </Layout>
-                                }
-                            />
-                            <Route
-                                path="/users/create"
-                                element={
-                                    <Layout>
-                                        <UserCreate />
-                                    </Layout>
-                                }
-                            />
-                            <Route
-                                path="/items/:id/edit"
-                                element={
-                                    <Layout>
-                                        <ItemEdit />
-                                    </Layout>
-                                }
-                            />
-                            <Route
-                                path="/items/create"
-                                element={
-                                    <Layout>
-                                        <ItemCreate />
-                                    </Layout>
-                                }
-                            />
-                            <Route
-                                path="/security"
-                                element={
-                                    <Layout>
-                                        <Security />
-                                    </Layout>
-                                }
-                            />
-                        </Routes>
-                    </AuthProvider>
-                </AdminProvider>
-            </SnackbarProvider>
+            <ConfirmProvider>
+                <SnackbarProvider maxSnack={3}>
+                    <AdminProvider>
+                        <AuthProvider>
+                            <Routes>
+                                <Route path='/login' element={<Login />} />
+                                <Route
+                                    path="/"
+                                    element={
+                                        <Layout>
+                                            <Dashboard />
+                                        </Layout>
+                                    }
+                                />
+                                <Route
+                                    path="/cubicles"
+                                    element={
+                                        <Layout>
+                                            <CubicleList />
+                                        </Layout>
+                                    }
+                                />
+                                <Route
+                                    path="/items"
+                                    element={
+                                        <Layout>
+                                            <ItemsList />
+                                        </Layout>
+                                    }
+                                />
+                                <Route
+                                    path="/taxpayers"
+                                    element={
+                                        <Layout>
+                                            <TaxpayerList />
+                                        </Layout>
+                                    }
+                                />
+                                <Route
+                                    path="/taxpayers/:id"
+                                    element={
+                                        <Layout>
+                                            <TaxpayerShow />
+                                        </Layout>
+                                    }
+                                />
+                                <Route
+                                    path="/taxpayers/:id/edit"
+                                    element={
+                                        <Layout>
+                                            <TaxpayerEdit />
+                                        </Layout>
+                                    }
+                                />
+                                <Route
+                                    path="/taxpayers/create"
+                                    element={
+                                        <Layout>
+                                            <TaxpayerCreate />
+                                        </Layout>
+                                    }
+                                />
+                                <Route
+                                    path="/users"
+                                    element={
+                                        <Layout>
+                                            <UserList />
+                                        </Layout>
+                                    }
+                                />
+                                <Route
+                                    path="/users/:id/edit"
+                                    element={
+                                        <Layout>
+                                            <UserEdit />
+                                        </Layout>
+                                    }
+                                />
+                                <Route
+                                    path="/users/create"
+                                    element={
+                                        <Layout>
+                                            <UserCreate />
+                                        </Layout>
+                                    }
+                                />
+                                <Route
+                                    path="/items/:id/edit"
+                                    element={
+                                        <Layout>
+                                            <ItemEdit />
+                                        </Layout>
+                                    }
+                                />
+                                <Route
+                                    path="/items/create"
+                                    element={
+                                        <Layout>
+                                            <ItemCreate />
+                                        </Layout>
+                                    }
+                                />
+                                <Route
+                                    path="/security"
+                                    element={
+                                        <Layout>
+                                            <Security />
+                                        </Layout>
+                                    }
+                                />
+                            </Routes>
+                        </AuthProvider>
+                    </AdminProvider>
+                </SnackbarProvider>
+            </ConfirmProvider>
         </ThemeProvider>
     );
 }
