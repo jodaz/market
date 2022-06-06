@@ -4,41 +4,8 @@ import Grid from '@mui/material/Grid'
 import { Form } from 'react-final-form'
 import Button from '@mui/material/Button'
 import PropTypes from 'prop-types'
-import merge from 'lodash/merge';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { AdminContext } from '../context/AdminContext'
-
-const getFormInitialValues = (
-    initialValues,
-    defaultValue,
-    record
-) => {
-    if (typeof defaultValue !== 'undefined') {
-        console.warn(
-            '"defaultValue" is deprecated, please use "initialValues" instead'
-        );
-    }
-
-    const finalInitialValues = merge(
-        {},
-        getValues(defaultValue, record),
-        getValues(initialValues, record),
-        record
-    );
-    return finalInitialValues;
-}
-
-function getValues(values, record) {
-    if (typeof values === 'object') {
-        return values;
-    }
-
-    if (typeof values === 'function') {
-        return values(record);
-    }
-
-    return {};
-}
 
 const BaseForm = ({
     children,
@@ -57,10 +24,6 @@ const BaseForm = ({
     const { dispatch } = React.useContext(AdminContext)
     const matches = useMediaQuery((theme) => theme.breakpoints.down('sm'));
 
-    const finalInitialValues = React.useMemo(
-        () => getFormInitialValues(initialValues, defaultValue, record),
-        [JSON.stringify({ initialValues, defaultValue, record })] // eslint-disable-line
-    );
     React.useEffect(() => {
         dispatch({ type: 'SET_TITLE', payload: title })
     }, [title])
@@ -71,7 +34,7 @@ const BaseForm = ({
                 <Form
                     onSubmit={save}
                     validate={validate}
-                    initialValues={finalInitialValues}
+                    initialValues={record}
                     {...rest}
                     render={ ({ handleSubmit, submitting }) => (
                         <form id="exampleForm" onSubmit={handleSubmit}>
@@ -124,11 +87,13 @@ const BaseForm = ({
 
 BaseForm.propTypes = {
     saveButtonLabel: PropTypes.string,
-    disabled: PropTypes.bool
+    disabled: PropTypes.bool,
+    title: PropTypes.string,
 }
 
 BaseForm.defaultProps = {
     saveButtonLabel: 'Guardar',
+    title: '',
     disabled: false,
     noButton: false,
     unresponsive: false

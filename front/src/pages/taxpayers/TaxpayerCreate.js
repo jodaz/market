@@ -43,13 +43,10 @@ const normalizeRif = value => {
 }
 
 const TaxpayerCreate = () => {
-    const [loading, setLoading] = React.useState(false)
     const [loaded, setLoaded] = React.useState(false)
     const navigate = useNavigate()
 
     const save = React.useCallback(async (values) => {
-        setLoading(true)
-
         try {
             const { data } = await axios.post('/taxpayers', values)
 
@@ -61,8 +58,6 @@ const TaxpayerCreate = () => {
                 return error.response.data.errors;
             }
         }
-
-        setLoading(false)
     }, [])
 
     React.useEffect(() => {
@@ -75,7 +70,6 @@ const TaxpayerCreate = () => {
         <BaseForm
             save={save}
             validate={validateItem}
-            loading={loading}
             title='Agregar contribuyente'
             unresponsive
         >

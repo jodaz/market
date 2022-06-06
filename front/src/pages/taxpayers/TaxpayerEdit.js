@@ -7,7 +7,7 @@ import TextInput from '../../components/TextInput'
 import { useNavigate } from 'react-router-dom'
 import axios from '../../api'
 
-const UserEdit = props => {
+const TaxpayerEdit = props => {
     const { id } = useParams();
     const [loading, setLoading] = React.useState(false)
     const [loaded, setLoaded] = React.useState(false)
@@ -95,4 +95,4 @@ const UserEdit = props => {
     )
 }
 
-export default UserEdit
+export default TaxpayerEdit

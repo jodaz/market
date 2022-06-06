@@ -8,7 +8,7 @@ import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import Checkbox from '@mui/material/Checkbox';
-import EditButton from '../../components/EditButton'
+import LinkIconButton from '../../components/LinkIconButton'
 import TableHead from '../../components/TableHead'
 import TableToolbar from '../../components/TableToolbar'
 
@@ -158,7 +158,7 @@ export default function EnhancedTable({
                                         scope="row"
                                         align='right'
                                     >
-                                        <EditButton href={`/users/${row.id}/edit`} />
+                                        <LinkIconButton href={`/users/${row.id}/edit`} />
                                     </TableCell>
                                 </TableRow>
                             );

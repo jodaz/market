@@ -16,6 +16,12 @@ const headCells = [
         label: 'Nombre',
     },
     { 
+        id: 'rif',
+        numeric: false,
+        disablePadding: true,
+        label: 'RIF',
+    },
+    { 
         id: 'address',
         numeric: false,
         disablePadding: true,

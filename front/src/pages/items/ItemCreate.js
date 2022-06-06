@@ -7,13 +7,10 @@ import axios from '../../api'
 import { useNavigate } from 'react-router-dom'
 
 const ItemCreate = props => {
-    const [loading, setLoading] = React.useState(false)
     const [loaded, setLoaded] = React.useState(false)
     const navigate = useNavigate()
 
     const save = React.useCallback(async (values) => {
-        setLoading(true)
-
         try {
             const { data } = await axios.post('/items', values)
 
@@ -25,8 +22,6 @@ const ItemCreate = props => {
                 return error.response.data.errors;
             }
         }
-
-        setLoading(false)
     }, [])
 
     React.useEffect(() => {
@@ -39,7 +34,6 @@ const ItemCreate = props => {
         <BaseForm
             save={save}
             validate={validateItem}
-            loading={loading}
             title='Agregar rubro'
             unresponsive
         >

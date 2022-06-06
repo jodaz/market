@@ -18,6 +18,7 @@ import Dashboard from './pages/dashboard'
 import Login from './pages/auth/Login'
 import TaxpayerCreate from './pages/taxpayers/TaxpayerCreate'
 import TaxpayerEdit from './pages/taxpayers/TaxpayerEdit'
+import TaxpayerShow from './pages/taxpayers/TaxpayerShow'
 import Security from './pages/account/Security';
 
 function App() {
@@ -56,6 +57,14 @@ function App() {
                             element={
                                 <Layout>
                                     <TaxpayerList />
+                                </Layout>
+                            }
+                        />
+                        <Route
+                            path="/taxpayers/:id"
+                            element={
+                                <Layout>
+                                    <TaxpayerShow />
                                 </Layout>
                             }
                         />

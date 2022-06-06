@@ -8,13 +8,10 @@ import axios from '../../api'
 import { useNavigate } from 'react-router-dom'
 
 const UserCreate = () => {
-    const [loading, setLoading] = React.useState(false)
     const [loaded, setLoaded] = React.useState(false)
     const navigate = useNavigate()
 
     const save = React.useCallback(async (values) => {
-        setLoading(true)
-
         try {
             const { data } = await axios.post('/users', values)
 
@@ -26,8 +23,6 @@ const UserCreate = () => {
                 return error.response.data.errors;
             }
         }
-
-        setLoading(false)
     }, [])
 
     React.useEffect(() => {
@@ -40,7 +35,6 @@ const UserCreate = () => {
         <BaseForm
             save={save}
             validate={validateItem}
-            loading={loading}
             title='Agregar usuario'
             unresponsive
         >

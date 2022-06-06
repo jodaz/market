@@ -8,9 +8,10 @@ import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import Checkbox from '@mui/material/Checkbox';
-import EditButton from '../../components/EditButton'
+import LinkIconButton from '../../components/LinkIconButton'
 import TableHead from '../../components/TableHead'
 import TableToolbar from '../../components/TableToolbar'
+import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
 
 function descendingComparator(a, b, orderBy) {
     if (b[orderBy] < a[orderBy]) {
@@ -150,7 +151,7 @@ export default function EnhancedTable({
                                         id={labelId}
                                         scope="row"
                                         padding="none"
-                                        width='100%'
+                                        width='40%'
                                     >
                                         {row.name}
                                     </TableCell>
@@ -159,15 +160,31 @@ export default function EnhancedTable({
                                         id={labelId}
                                         scope="row"
                                         padding="none"
-                                        width='100%'
+                                        width='20%'
+                                    >
+                                        {row.rif}
+                                    </TableCell>
+                                    <TableCell
+                                        component="th"
+                                        id={labelId}
+                                        scope="row"
+                                        padding="none"
+                                        width='30%'
                                     >
                                         {row.address}
                                     </TableCell>
                                     <TableCell
                                         scope="row"
                                         align='right'
+                                        width='10%'
                                     >
-                                        <EditButton href={`/taxpayers/${row.id}/edit`} />
+                                        <Box display="flex" justifyContent={'center'}>
+                                            <LinkIconButton href={`/taxpayers/${row.id}/edit`} />
+                                            <LinkIconButton
+                                                href={`/taxpayers/${row.id}`} 
+                                                icon={<RemoveRedEyeIcon />}
+                                            />
+                                        </Box>
                                     </TableCell>
                                 </TableRow>
                             );
