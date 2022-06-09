@@ -33,7 +33,8 @@ class AuthController extends Controller
 
         return [
             'token' => $token->plainTextToken,
-            'user' => $user
+            'user' => $user,
+            'roles' => $user->roles
         ];
     }
 

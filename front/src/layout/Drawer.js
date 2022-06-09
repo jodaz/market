@@ -9,20 +9,29 @@ import List from '@mui/material/List';
 import MenuIcon from '@mui/icons-material/Menu';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
-import routes from '../routes'
+import { routes, adminRoutes } from '../routes'
 import ListItemLink from '../components/ListItemLink';
+import Submenu from '../components/Submenu';
 import { useAdmin } from '../context/AdminContext'
 import AccountMenu from './AccountMenu'
 import LogoutButton from '../components/LogoutButton';
+import PeopleIcon from '@mui/icons-material/People';
 
 const drawerWidth = 240;
 
-function ResponsiveDrawer(props) {
+function ResponsiveDrawer() {
+    const [state, setState] = React.useState({
+        administration: false
+    });
     const [mobileOpen, setMobileOpen] = React.useState(false);
-    const { state } = useAdmin()
+    const { state: AdminState } = useAdmin()
 
     const handleDrawerToggle = () => {
         setMobileOpen(!mobileOpen);
+    };
+
+    const handleToggle = menu => {
+        setState(state => ({ ...state, [menu]: !state[menu] }));
     };
 
     const drawer = (
@@ -38,6 +47,22 @@ function ResponsiveDrawer(props) {
                         key={index}
                     />
                 ))}
+                <Submenu
+                    handleToggle={() => handleToggle('administration')}
+                    isOpen={state.administration}
+                    sidebarIsOpen={true}
+                    name='Administración'
+                    icon={<PeopleIcon />}
+                >
+                    {adminRoutes.map((route, index) => (
+                        <ListItemLink
+                            primary={route.name}
+                            to={route.route}
+                            icon={route.icon}
+                            key={index}
+                        />
+                    ))}
+                </Submenu>
                 <LogoutButton />
             </List>
             <Divider />
@@ -65,7 +90,7 @@ function ResponsiveDrawer(props) {
                         <MenuIcon />
                     </IconButton>
                     <Typography variant="h6" noWrap component="div">
-                        {state.title}
+                        {AdminState.title}
                     </Typography>
                     <Box flex='1' justifyContent='flex-end' display='flex'>
                         <AccountMenu />
