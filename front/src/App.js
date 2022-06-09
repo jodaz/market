@@ -11,16 +11,19 @@ import Layout from './layout'
 import ItemsList from './pages/items/ItemList'
 import ItemEdit from './pages/items/ItemEdit'
 import ItemCreate from './pages/items/ItemCreate'
-import TaxpayerList from './pages/taxpayers/TaxpayerList'
 import UserList from './pages/users/UserList'
 import UserCreate from './pages/users/UserCreate'
 import UserEdit from './pages/users/UserEdit'
 import CubicleList from './pages/cubicles/CubicleList'
 import Dashboard from './pages/dashboard'
 import Login from './pages/auth/Login'
+import TaxpayerList from './pages/taxpayers/TaxpayerList'
 import TaxpayerCreate from './pages/taxpayers/TaxpayerCreate'
 import TaxpayerEdit from './pages/taxpayers/TaxpayerEdit'
 import TaxpayerShow from './pages/taxpayers/TaxpayerShow'
+import RoleList from './pages/roles/RoleList'
+import RoleCreate from './pages/roles/RoleCreate'
+import RoleEdit from './pages/roles/RoleEdit'
 import Security from './pages/account/Security';
 
 function App() {
@@ -85,6 +88,30 @@ function App() {
                                     element={
                                         <Layout>
                                             <TaxpayerCreate />
+                                        </Layout>
+                                    }
+                                />
+                                <Route
+                                    path="/roles"
+                                    element={
+                                        <Layout>
+                                            <RoleList />
+                                        </Layout>
+                                    }
+                                />
+                                <Route
+                                    path="/roles/:id/edit"
+                                    element={
+                                        <Layout>
+                                            <RoleEdit />
+                                        </Layout>
+                                    }
+                                />
+                                <Route
+                                    path="/roles/create"
+                                    element={
+                                        <Layout>
+                                            <RoleCreate />
                                         </Layout>
                                     }
                                 />

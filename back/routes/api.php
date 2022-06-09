@@ -10,6 +10,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\TaxpayerController;
 use App\Http\Controllers\ItemController;
 use App\Http\Controllers\CubicleController;
+use App\Http\Controllers\RoleController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UpdatePasswordController;
 
@@ -29,6 +30,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::resource('/items', ItemController::class);
     Route::resource('/taxpayers', TaxpayerController::class);
     Route::resource('/cubicles', CubicleController::class);
+    Route::resource('/roles', RoleController::class);
     Route::get('/logout', [AuthController::class, 'logout']);
     Route::post('/security', UpdatePasswordController::class);
 });

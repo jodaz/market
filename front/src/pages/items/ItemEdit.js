@@ -2,9 +2,8 @@ import * as React from 'react'
 import { validateItem } from './itemValidations';
 import BaseForm from '../../components/BaseForm'
 import InputContainer from '../../components/InputContainer'
-import { useParams } from 'react-router-dom'
 import TextInput from '../../components/TextInput'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import axios from '../../api'
 import { useSnackbar } from 'notistack';
 
@@ -28,7 +27,6 @@ const ItemEdit = () => {
             }
         }
     }, [id])
-
 
     const fetchRecord = React.useCallback(async () => {
         const { data } = await axios.get(`/items/${id}`);
@@ -59,11 +57,6 @@ const ItemEdit = () => {
             </InputContainer>
         </BaseForm>
     )
-}
-
-ItemEdit.defaultProps = {
-    basePath: 'items',
-    resource: 'items'
 }
 
 export default ItemEdit

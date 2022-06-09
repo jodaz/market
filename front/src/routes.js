@@ -30,6 +30,11 @@ const routes = [
         route: '/users',
         icon: <GroupIcon />
     },
+    {
+        name: 'Roles',
+        route: '/roles',
+        icon: <GroupIcon />
+    },
 ]
 
 export default routes;

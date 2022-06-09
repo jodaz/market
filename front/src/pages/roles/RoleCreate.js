@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { validateItem } from './itemValidations';
+import { validateItem } from './rolValidations';
 import BaseForm from '../../components/BaseForm'
 import InputContainer from '../../components/InputContainer'
 import TextInput from '../../components/TextInput'
@@ -13,11 +13,11 @@ const ItemCreate = () => {
 
     const save = React.useCallback(async (values) => {
         try {
-            const { data } = await axios.post('/items', values)
+            const { data } = await axios.post('/roles', values)
 
             if (data) {
-                navigate('/items')
-                enqueueSnackbar(`¡Ha registrado el rubro "${data.name}"`, { variant: 'success' });
+                navigate('/roles')
+                enqueueSnackbar(`¡Ha registrado el rol "${data.name}"`, { variant: 'success' });
             }
         } catch (error) {
             if (error.response.data.errors) {
@@ -30,7 +30,7 @@ const ItemCreate = () => {
         <BaseForm
             save={save}
             validate={validateItem}
-            title='Agregar rubro'
+            title='Agregar rol'
             unresponsive
         >
             <InputContainer label='Nombre'>
