@@ -4,6 +4,15 @@ import FiberManualRecordIcon from '@mui/icons-material/FiberManualRecord';
 import BusinessCenterIcon from '@mui/icons-material/BusinessCenter';
 import AddBusinessIcon from '@mui/icons-material/AddBusiness';
 
+const AdminIcon = () => (
+    <FiberManualRecordIcon sx={{
+        color: theme => theme.palette.primary.main,
+        marginLeft: '1rem',
+        paddingRight: '-1rem',
+        fontSize: '0.7rem'
+    }}/>
+)
+
 export const routes = [
     {
         name: 'Inicio',
@@ -31,21 +40,11 @@ export const adminRoutes = [
     {
         name: 'Usuarios',
         route: '/users',
-        icon: <FiberManualRecordIcon sx={{
-            color: theme => theme.palette.primary.main,
-            marginLeft: '1rem',
-            paddingRight: '-1rem',
-            fontSize: '0.7rem'
-        }}/>
+        icon: <AdminIcon />
     },
     {
         name: 'Roles',
         route: '/roles',
-        icon: <FiberManualRecordIcon sx={{
-            color: theme => theme.palette.primary.main,
-            marginLeft: '1rem',
-            paddingRight: '-1rem',
-            fontSize: '0.7rem'
-        }}/>
+        icon: <AdminIcon />
     },
 ]
