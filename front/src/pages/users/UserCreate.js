@@ -7,6 +7,7 @@ import TextInput from '../../components/TextInput'
 import axios from '../../api'
 import { useNavigate } from 'react-router-dom'
 import { useSnackbar } from 'notistack';
+import SelectRolesInput from './SelectRolesInput';
 
 const UserCreate = () => {
     const navigate = useNavigate()
@@ -72,6 +73,7 @@ const UserCreate = () => {
                     fullWidth
                 />
             </InputContainer>
+            <SelectRolesInput name='roles_ids' />
         </BaseForm>
     )
 }

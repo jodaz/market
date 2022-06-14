@@ -44,7 +44,6 @@ function useAdmin() {
 }
 
 function setTitle(dispatch, title) {
-    console.log(title)
     dispatch({ type: 'SET_TITLE', payload: title })
 }
 

@@ -79,6 +79,8 @@ class UserController extends Controller
             'phone' => $request->input('phone')
         ]);
 
+        $create->roles()->sync($request->roles_ids);
+
         return $create;
     }
 
@@ -90,7 +92,7 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
-        return $user;
+        return $user->load('roles');
     }
 
     public function updatePassword(UpdatePassword $request)
@@ -112,8 +114,7 @@ class UserController extends Controller
         $user->password = bcrypt($newPassword);
         $user->save();
 
-        return Redirect::back()
-            ->withSuccess('¡Contraseña actualizada!');
+        return response()->json(['success' => true], 200);
     }
 
     /**
@@ -127,9 +128,10 @@ class UserController extends Controller
     {
         $user->update($request->all());
 
+        $user->roles()->sync($request->roles);
+
         return $user;
     }
-
 
     /**
      * Remove the specified resource from storage.

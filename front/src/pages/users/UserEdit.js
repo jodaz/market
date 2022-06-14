@@ -8,6 +8,7 @@ import { useNavigate } from 'react-router-dom'
 import axios from '../../api'
 import PasswordInput from '../../components/PasswordInput'
 import { useSnackbar } from 'notistack';
+import SelectRolesInput from './SelectRolesInput';
 
 const UserEdit = () => {
     const { id } = useParams();
@@ -36,7 +37,6 @@ const UserEdit = () => {
 
     const fetchRecord = React.useCallback(async () => {
         const { data } = await axios.get(`/users/${id}`);
-        console.log(data)
         setRecord(data);
     }, []);
 
@@ -89,6 +89,7 @@ const UserEdit = () => {
                     fullWidth
                 />
             </InputContainer>
+            <SelectRolesInput name='roles' />
         </BaseForm>
     )
 }
