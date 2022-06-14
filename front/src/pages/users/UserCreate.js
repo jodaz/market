@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { validateItem } from './userValidations';
+import { validateCreateUser } from './userValidations';
 import BaseForm from '../../components/BaseForm'
 import InputContainer from '../../components/InputContainer'
 import PasswordInput from '../../components/PasswordInput'
@@ -8,6 +8,7 @@ import axios from '../../api'
 import { useNavigate } from 'react-router-dom'
 import { useSnackbar } from 'notistack';
 import SelectRolesInput from './SelectRolesInput';
+import { identityCard } from './userTextFormats'
 
 const UserCreate = () => {
     const navigate = useNavigate()
@@ -34,7 +35,7 @@ const UserCreate = () => {
     return (
         <BaseForm
             save={save}
-            validate={validateItem}
+            validate={validateCreateUser}
             title='Agregar usuario'
             unresponsive
         >
@@ -42,6 +43,7 @@ const UserCreate = () => {
                 <TextInput
                     name="identity_card"
                     placeholder="Cédula de identidad"
+                    parse={identityCard}
                     fullWidth
                 />
             </InputContainer>
