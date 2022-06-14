@@ -1,8 +1,6 @@
 import * as React from 'react';
 import { Form } from 'react-final-form';
-import Card from '@mui/material/Card'
 import Box from '@mui/material/Box'
-import CardActions from '@mui/material/CardActions'
 import Button from '@mui/material/Button'
 import TextInput from '../../components/TextInput'
 import PasswordInput from '../../components/PasswordInput'
@@ -10,6 +8,7 @@ import InputContainer from '../../components/InputContainer'
 import axios from '../../api'
 import { useNavigate } from 'react-router-dom'
 import { useAuth, loginUser } from '../../context/AuthContext'
+import fondo from '../../images/Fondo.png'
 
 const validate = (values) => {
     const errors = {};
@@ -54,7 +53,9 @@ const Login = () => {
             alignItems: 'center',
             justifyContent: 'center',
             width: '100%',
-            height: '100%'
+            height: '100%',
+            background: `url(${fondo}) no-repeat center center fixed`,
+            backgroundSize: 'cover'
         }}>
             <Box
                 component='div'
@@ -77,7 +78,7 @@ const Login = () => {
                                 justifyContent='space-between'
                             >
                                 <Box>
-                                    <InputContainer label='Correo electrónico' md={12}>
+                                    <InputContainer label='Usuario' md={12}>
                                         <TextInput
                                             name="login"
                                             placeholder="Ingrese su nombre de usuario"
