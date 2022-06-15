@@ -6,6 +6,18 @@ import StatsBox from './StatsBox'
 import BusinessCenterIcon from '@mui/icons-material/BusinessCenter';
 import StorefrontIcon from '@mui/icons-material/Storefront';
 import axios from '../../api'
+import { styled } from '@mui/system';
+
+const Container = styled(Box)(({ theme }) => ({
+    display: 'flex',
+    width: '100%',
+    flexDirection: 'row',
+    marginTop: '2rem',
+    [theme.breakpoints.down('md')]: {
+        flexDirection: 'column',
+        alignItems: 'center'
+    },
+}));
 
 const initialState = {
     taxpayers: 0,
@@ -35,7 +47,7 @@ const Dashboard = () => {
                 <Box fontWeight='600' width='100%' fontSize='1.5rem'>
                     Estadísticas
                 </Box>
-                <Box display='flex' width='100%' marginTop='1rem'>
+                <Container>
                     <StatsBox
                         total={taxpayers}
                         title='Contribuyentes'
@@ -52,7 +64,7 @@ const Dashboard = () => {
                             fontSize: '70px'
                         }} />}
                     />
-                </Box>
+                </Container>
             </Box>
         </Box>
     )

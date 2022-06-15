@@ -16,7 +16,8 @@ const StatsBox = ({ title, total, icon, to }) => {
                 maxWidth: '300px',
                 boxShadow: 3,
                 borderRadius: 2,
-                marginRight: '1rem'
+                marginRight: '1rem',
+                marginBottom: '1rem'
             }}
             onClick={() => navigate(to)}
         >
