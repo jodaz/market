@@ -13,6 +13,7 @@ use App\Http\Controllers\CubicleController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UpdatePasswordController;
+use App\Http\Controllers\StatisticsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,6 +34,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::resource('/roles', RoleController::class);
     Route::get('/logout', [AuthController::class, 'logout']);
     Route::post('/security', UpdatePasswordController::class);
+    Route::get('/statistics', StatisticsController::class);
 });
 
 Route::post('/login', [AuthController::class, 'login']);
