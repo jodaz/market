@@ -9,6 +9,20 @@ const initialState = {
     token: ''
 }
 
+const getInitialState = () => {
+    const localInitialState = { ...initialState };
+
+    if (localStorage.getItem(CONFIG_NAMES.USER)) {
+        localInitialState.user = JSON.parse(localStorage.getItem(CONFIG_NAMES.USER))
+    }
+    if (localStorage.getItem(CONFIG_NAMES.AUTH_TOKEN)) {
+        localInitialState.token = localStorage.getItem(CONFIG_NAMES.AUTH_TOKEN);
+        localInitialState.isAuth = true;
+    }
+
+    return localInitialState;
+}
+
 function authReducer(state, action) {
     if (action) {
         switch (action.type) {
@@ -31,7 +45,7 @@ function authReducer(state, action) {
 }
 
 function AuthProvider({ children }) {
-    const [state, dispatch] = React.useReducer(authReducer, initialState)
+    const [state, dispatch] = React.useReducer(authReducer, getInitialState())
 
     return (
         <AuthContext.Provider value={{ state, dispatch }}>
@@ -72,6 +86,5 @@ async function logout(dispatch) {
         console.log(e);
     }
 }
-
 
 export { useAuth, AuthProvider, loginUser, logout }
