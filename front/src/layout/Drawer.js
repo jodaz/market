@@ -16,6 +16,7 @@ import { useAdmin } from '../context/AdminContext'
 import AccountMenu from './AccountMenu'
 import LogoutButton from '../components/LogoutButton';
 import PeopleIcon from '@mui/icons-material/People';
+import GoBackButton from './GoBackButton'
 
 const drawerWidth = 240;
 
@@ -89,6 +90,7 @@ function ResponsiveDrawer() {
                     >
                         <MenuIcon />
                     </IconButton>
+                    <GoBackButton />
                     <Typography variant="h6" noWrap component="div">
                         {AdminState.title}
                     </Typography>
