@@ -37,7 +37,7 @@ const useFetch = (url, params) => {
     } = params
 
     React.useEffect(() => {
-        if (hasMore == null || hasMore == true) {
+        // if (hasMore == null || hasMore == true) {
             setLoading(true)
             setError(false)
 
@@ -58,7 +58,7 @@ const useFetch = (url, params) => {
             }).catch(e => {
                 setError(true)
             })
-        }
+        // }
     }, [page, perPage, filter, sort])
 
     return { loading, error, data, hasMore, total }

@@ -4,9 +4,13 @@ import TextField from '@mui/material/TextField'
 import SearchIcon from '@mui/icons-material/Search';
 import { useMediaQuery } from '@mui/material'
 import useFetch from '../../hooks/useFetch'
-import Table from './Table'
+import Table from '../../components/Table'
 import ButtonLink from '../../components/ButtonLink'
 import ListContainer from '../../components/ListContainer';
+import LinkIconButton from '../../components/LinkIconButton';
+import TableCell from '@mui/material/TableCell';
+import TableRow from '@mui/material/TableRow';
+import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
 
 const headCells = [
     { 
@@ -40,16 +44,12 @@ const TaxpayerList = () => {
         theme.breakpoints.down('sm')
     )
     const [filter, setFilter] = React.useState({})
-    const {
-        loading,
-        error,
-        data,
-        hasMore
-    } = useFetch('/taxpayers', {
+    const { loading, total, data } = useFetch('/taxpayers', {
         perPage: 10,
         page: 1,
         filter: filter
     })
+    const [items, setItems] = React.useState({})
 
     const handleOnChange = (e) => {
         if (e.currentTarget.value) {
@@ -60,6 +60,54 @@ const TaxpayerList = () => {
             setFilter({})
         }
     }
+
+    const rowRender = () => (
+        items.map(row => (
+            <TableRow hover tabIndex={-1} key={row.name}>
+                <TableCell
+                    component="th"
+                    id={row.id}
+                    scope="row"
+                    padding="normal"
+                    width='40%'
+                >
+                    {row.name}
+                </TableCell>
+                <TableCell
+                    component="th"
+                    id={row.id}
+                    scope="row"
+                    padding="none"
+                    width='20%'
+                >
+                    {row.rif}
+                </TableCell>
+                <TableCell
+                    component="th"
+                    id={row.id}
+                    scope="row"
+                    padding="none"
+                    width='30%'
+                >
+                    {row.address}
+                </TableCell>
+                <TableCell
+                    scope="row"
+                    align='right'
+                    width='10%'
+                >
+                    <Box display="flex" justifyContent={'center'}>
+                        <LinkIconButton href={`/taxpayers/${row.id}/edit`} />
+                        <LinkIconButton
+                            href={`/taxpayers/${row.id}`} 
+                            icon={<RemoveRedEyeIcon />}
+                        />
+                    </Box>
+                </TableCell>
+            </TableRow>
+        )))
+
+    React.useEffect(() => setItems(data), [data])
 
     return (
         <ListContainer title="Contribuyentes">
@@ -87,7 +135,12 @@ const TaxpayerList = () => {
                 </Box>
             </Box>
             <Box>
-                <Table headCells={headCells} data={data} />
+                <Table
+                    headCells={headCells}
+                    rows={items.length && rowRender()}
+                    loading={loading}
+                    total={total}
+                />
             </Box>
         </ListContainer>
     )
