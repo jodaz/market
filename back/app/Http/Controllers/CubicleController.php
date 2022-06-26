@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Cubicle;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
+use Auth;
 
 class CubicleController extends Controller
 {
@@ -22,8 +24,8 @@ class CubicleController extends Controller
         if ($request->has('filter')) {
             $filters = $request->filter;
 
-            if (array_key_exists('num', $filters)) {
-                $query->whereLike('num', $filters['num']);
+            if (array_key_exists('address', $filters)) {
+                $query->whereLike('address', $filters['address']);
             }
         }
 
@@ -42,7 +44,15 @@ class CubicleController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        foreach($request->cubicles as $cubicle) {
+            Cubicle::create([
+                'item_id' => $request->item_id,
+                'address' => $cubicle->address,
+                'created_by' => Auth::user()->id
+            ]);
+        }
+
+        return response()->json(['success' => true], 200);
     }
 
     /**
@@ -53,7 +63,7 @@ class CubicleController extends Controller
      */
     public function show(Cubicle $cubicle)
     {
-        //
+        return $cubicle->load('taxpayer');
     }
 
     /**
@@ -65,7 +75,13 @@ class CubicleController extends Controller
      */
     public function update(Request $request, Cubicle $cubicle)
     {
-        //
+        $newCubicle = $cubicle->replicate();
+
+        $cubicle->update(['active' => false]);
+
+        $newCubicle->update($request->all());
+
+        return $newCubicle;
     }
 
     /**
@@ -76,6 +92,10 @@ class CubicleController extends Controller
      */
     public function destroy(Cubicle $cubicle)
     {
-        //
+        $cubicle->update([
+            'disincorporated_at' => Carbon::now()
+        ]);
+
+        return $cubicle;
     }
 }

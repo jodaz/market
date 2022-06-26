@@ -17,7 +17,7 @@ const TaxpayerCreate = () => {
             const { data } = await axios.post('/taxpayers', values)
 
             if (data) {
-                navigate('/taxpayers')
+                navigate(`/taxpayers/${data.id}`)
                 enqueueSnackbar(
                     `¡Ha registrado el contribuyente "${data.name}"!`, 
                     { variant: 'success' }

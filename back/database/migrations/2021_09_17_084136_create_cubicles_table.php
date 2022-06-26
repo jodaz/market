@@ -15,7 +15,7 @@ class CreateCubiclesTable extends Migration
     {
         Schema::create('cubicles', function (Blueprint $table) {
             $table->id();
-            $table->string('addresses');
+            $table->string('address');
             $table->boolean('active')->default(true);
             $table->unsignedBigInteger('item_id');
             $table->unsignedBigInteger('created_by');
@@ -23,6 +23,7 @@ class CreateCubiclesTable extends Migration
                 ->onUpdate('cascade')->onDelete('cascade');
             $table->foreign('created_by')->references('id')->on('users')
                 ->onUpdate('cascade')->onDelete('cascade');
+            $table->timestamp('disincorporated_at')->nullable();
             $table->timestamps();
         });
     }

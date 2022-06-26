@@ -11,7 +11,14 @@ const ListContainer = ({ children, title }) => {
 
     
     return (
-        <Box display='flex' flexDirection='column' width='100%'>
+        <Box sx={{
+            flexDirection: 'column',
+            width: '100%',
+            display: 'flex',
+            padding: '1rem',
+            borderRadius: '4px',
+            backgroundColor: theme => theme.palette.secondary.main
+        }}>
             {children}
         </Box>
     )

@@ -14,9 +14,10 @@ class Cubicle extends Model
     protected $fillable = [
         'num',
         'item_id',
-        'addresses',
+        'address',
         'taxpayer_id',
-        'created_by'
+        'created_by',
+        'disincorporated_at'
     ];
 
     public function item()

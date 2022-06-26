@@ -16,7 +16,7 @@ import axios from '../../api'
 
 const headCells = [
     { 
-        id: 'name',
+        id: 'address',
         numeric: false,
         disablePadding: true,
         label: 'Nombre',
@@ -29,11 +29,11 @@ const headCells = [
     }
 ];
 
-const CubicleList = () => {
+const CubicleList = ({ initialValues, createButton }) => {
     const isSmall = useMediaQuery(theme =>
         theme.breakpoints.down('sm')
     )
-    const [filter, setFilter] = React.useState({})
+    const [filter, setFilter] = React.useState(initialValues)
     const { loading, total, data } = useFetch('/cubicles', {
         perPage: 10,
         page: 1,
@@ -44,11 +44,11 @@ const CubicleList = () => {
 
     const handleOnChange = (e) => {
         if (e.currentTarget.value) {
-            setFilter({
-                name: e.currentTarget.value
-            })
+            const value = e.currentTarget.value;
+
+            setFilter(prevState => ({ ...prevState, address: value }))
         } else {
-            setFilter({})
+            setFilter(initialValues)
         }
     }
 
@@ -58,7 +58,7 @@ const CubicleList = () => {
         if (data) {
             setItems(prevItems => [...prevItems.filter(({ id }) => id != data.id)])
             enqueueSnackbar(
-                `¡Ha eliminado el cubículo "${data.name}"`, 
+                `¡Ha eliminado el cubículo "${data.address}"`, 
                 { variant: 'success' }
             );
         }
@@ -66,7 +66,7 @@ const CubicleList = () => {
 
     const rowRender = () => (
         items.map(row => (
-            <TableRow hover tabIndex={-1} key={row.name}>
+            <TableRow hover tabIndex={-1} key={row.address}>
                 <TableCell
                     component="th"
                     id={row.id}
@@ -74,7 +74,7 @@ const CubicleList = () => {
                     padding="normal"
                     width='100%'
                 >
-                    {row.name}
+                    {row.address}
                 </TableCell>
                 <TableCell
                     scope="row"
@@ -83,7 +83,7 @@ const CubicleList = () => {
                     <Box sx={{ display: 'flex', justifyContent: 'center' }}>
                         <LinkIconButton href={`/cubicles/${row.id}/edit`} />
                         <DeleteButton
-                            title={`¿Está seguro que desea eliminar el rol "${row.name}"?`}
+                            title={`¿Está seguro que desea eliminar el rol "${row.address}"?`}
                             onClick={() => handleDelete(row)}
                         />
                     </Box>
@@ -96,7 +96,7 @@ const CubicleList = () => {
     return (
         <ListContainer title="Cubículos">
             <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
-                <Box width={isSmall ? '100%' : '40%'}>
+                <Box width={isSmall ? '100%' : '40%'} backgroundColor='#fff'>
                     <TextField
                         onChange={handleOnChange}
                         InputProps={{
@@ -110,17 +110,29 @@ const CubicleList = () => {
                         fullWidth
                     />
                 </Box>
+                {(createButton) && (
+                    <Box>
+                        <ButtonLink
+                            color="primary"
+                            variant="contained"
+                            to={`/cubicles/${initialValues.taxpayer_id}/create`}
+                        />
+                    </Box>
+                )}
             </Box>
-            <Box>
-                <Table
-                    headCells={headCells}
-                    rows={items.length && rowRender()}
-                    loading={loading}
-                    total={total}
-                />
-            </Box>
+            <Table
+                headCells={headCells}
+                rows={items.length && rowRender()}
+                loading={loading}
+                total={total}
+            />
         </ListContainer>
     )
+}
+
+CubicleList.defaultProps = {
+    initialValues: {},
+    createButton: false
 }
 
 export default CubicleList

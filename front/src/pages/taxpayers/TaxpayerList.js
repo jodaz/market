@@ -112,7 +112,7 @@ const TaxpayerList = () => {
     return (
         <ListContainer title="Contribuyentes">
             <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
-                <Box width={isSmall ? '100%' : '40%'}>
+                <Box width={isSmall ? '100%' : '40%'} backgroundColor='#fff'>
                     <TextField
                         onChange={handleOnChange}
                         InputProps={{

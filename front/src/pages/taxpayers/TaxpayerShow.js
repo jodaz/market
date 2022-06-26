@@ -9,8 +9,9 @@ import EmailIcon from '@mui/icons-material/Email';
 import LinkIconButton from '../../components/LinkIconButton';
 import LoadingIndicator from '../../components/LoadingIndicator'
 import { setTitle, useAdmin } from '../../context/AdminContext'
+import CubicleList from '../cubicles/CubicleList';
 
-const TaxpayerShow = props => {
+const TaxpayerShow = () => {
     const { dispatch } = useAdmin()
     const { id } = useParams();
     const [record, setRecord] = React.useState(null)
@@ -39,7 +40,8 @@ const TaxpayerShow = props => {
                 display: 'flex',
                 backgroundColor: theme => theme.palette.secondary.main,
                 padding: '1.5rem 1rem',
-                borderRadius: 1
+                borderRadius: 1,
+                marginBottom: '1rem'
             }}>
                 <Box sx={{
                     display: 'flex',
@@ -80,6 +82,9 @@ const TaxpayerShow = props => {
                     <LinkIconButton href={`/taxpayers/${record.id}/edit`} />
                 </Box>
             </Box>
+            <CubicleList initialValues={{
+                taxpayer_id: id
+            }} createButton />
         </Box>
     )
 }

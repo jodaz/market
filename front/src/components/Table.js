@@ -26,47 +26,45 @@ const EnhancedTable = ({
         setPage(0);
     };
 
-    console.log(rows)
-
     return (
-        <Box sx={{ width: '100%' }}>
+        <Box sx={{ width: '100%', marginTop: '1.5rem' }}>
             <Paper sx={{ width: '100%', mb: 2 }}>
                 <TableContainer>
-                <Table
-                    sx={{ minWidth: 750 }}
-                    aria-labelledby="tableTitle"
-                >
-                    <TableHead
-                        headCells={headCells}
-                    />
-                    <TableBody>
-                        {rows.length && rows}
-                        {loading && (
-                            <TableRow>
-                                <TableCell
-                                    align='center'
-                                    scope="row"
-                                    padding="normal"
-                                    width='100%'
-                                >
-                                    Cargando
-                                </TableCell>
-                            </TableRow>
-                        )}
-                        {(!rows.length && !loading) && (
-                            <TableRow>
-                                <TableCell
-                                    align='center'
-                                    scope="row"
-                                    padding="normal"
-                                    width='100%'
-                                >
-                                    Sin registros
-                                </TableCell>
-                            </TableRow>
-                        )}
-                    </TableBody>
-                </Table>
+                    <Table
+                        sx={{ minWidth: 750 }}
+                        aria-labelledby="tableTitle"
+                    >
+                        <TableHead
+                            headCells={headCells}
+                        />
+                        <TableBody>
+                            {rows.length && rows}
+                            {loading && (
+                                <TableRow>
+                                    <TableCell
+                                        align='center'
+                                        scope="row"
+                                        padding="normal"
+                                        width='100%'
+                                    >
+                                        Cargando
+                                    </TableCell>
+                                </TableRow>
+                            )}
+                            {(!rows.length && !loading) && (
+                                <TableRow>
+                                    <TableCell
+                                        align='center'
+                                        scope="row"
+                                        padding="normal"
+                                        width='100%'
+                                    >
+                                        Sin registros
+                                    </TableCell>
+                                </TableRow>
+                            )}
+                        </TableBody>
+                    </Table>
                 </TableContainer>
                 <TablePagination
                     rowsPerPageOptions={[5, 10, 25]}

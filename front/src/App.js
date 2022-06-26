@@ -15,6 +15,7 @@ import UserList from './pages/users/UserList'
 import UserCreate from './pages/users/UserCreate'
 import UserEdit from './pages/users/UserEdit'
 import CubicleList from './pages/cubicles/CubicleList'
+import CubicleCreate from './pages/cubicles/CubicleCreate'
 import Dashboard from './pages/dashboard'
 import Login from './pages/auth/Login'
 import TaxpayerList from './pages/taxpayers/TaxpayerList'
@@ -48,6 +49,14 @@ function App() {
                                     element={
                                         <Layout>
                                             <CubicleList />
+                                        </Layout>
+                                    }
+                                />
+                                <Route
+                                    path="/cubicles/:id/create"
+                                    element={
+                                        <Layout>
+                                            <CubicleCreate />
                                         </Layout>
                                     }
                                 />
