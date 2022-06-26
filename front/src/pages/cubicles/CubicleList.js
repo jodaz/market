@@ -22,6 +22,18 @@ const headCells = [
         label: 'Nombre',
     },
     { 
+        id: 'taxpayer',
+        numeric: false,
+        disablePadding: true,
+        label: 'Contribuyente',
+    },
+    { 
+        id: 'item',
+        numeric: false,
+        disablePadding: true,
+        label: 'Rubro',
+    },
+    { 
         id: 'actions',
         numeric: false,
         disablePadding: true,
@@ -29,7 +41,14 @@ const headCells = [
     }
 ];
 
-const CubicleList = ({ initialValues, createButton }) => {
+const optionalHeader = { 
+    id: 'taxpayer',
+    numeric: false,
+    disablePadding: true,
+    label: 'Contribuyente',
+};
+
+const CubicleList = ({ initialValues, createButton, showTaxpayer }) => {
     const isSmall = useMediaQuery(theme =>
         theme.breakpoints.down('sm')
     )
@@ -58,7 +77,7 @@ const CubicleList = ({ initialValues, createButton }) => {
         if (data) {
             setItems(prevItems => [...prevItems.filter(({ id }) => id != data.id)])
             enqueueSnackbar(
-                `¡Ha eliminado el cubículo "${data.address}"`, 
+                `¡Ha desincorporado el cubículo "${data.address}"`, 
                 { variant: 'success' }
             );
         }
@@ -72,18 +91,37 @@ const CubicleList = ({ initialValues, createButton }) => {
                     id={row.id}
                     scope="row"
                     padding="normal"
-                    width='100%'
+                    width='50%'
                 >
                     {row.address}
                 </TableCell>
                 <TableCell
+                    component="th"
+                    id={row.id}
+                    scope="row"
+                    padding="normal"
+                    width='30%'
+                >
+                    {row.taxpayer.name}
+                </TableCell>
+                <TableCell
+                    component="th"
+                    id={row.id}
+                    scope="row"
+                    padding="normal"
+                    width='10%'
+                >
+                    {row.item.name}
+                </TableCell>
+                <TableCell
                     scope="row"
                     align='right'
+                    width='10%'
                 >
                     <Box sx={{ display: 'flex', justifyContent: 'center' }}>
                         <LinkIconButton href={`/cubicles/${row.id}/edit`} />
                         <DeleteButton
-                            title={`¿Está seguro que desea eliminar el rol "${row.address}"?`}
+                            title={`¿Está seguro que desea desincorporar el cubículo "${row.address}"?`}
                             onClick={() => handleDelete(row)}
                         />
                     </Box>
@@ -132,7 +170,8 @@ const CubicleList = ({ initialValues, createButton }) => {
 
 CubicleList.defaultProps = {
     initialValues: {},
-    createButton: false
+    createButton: false,
+    showTaxpayer: false
 }
 
 export default CubicleList

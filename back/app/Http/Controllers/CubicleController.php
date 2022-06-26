@@ -16,7 +16,7 @@ class CubicleController extends Controller
      */
     public function index(Request $request)
     {
-        $query = Cubicle::query();
+        $query = Cubicle::query()->with('taxpayer', 'item');
         $results = $request->perPage;
         $sort = $request->sort;
         $order = $request->order;
@@ -24,8 +24,14 @@ class CubicleController extends Controller
         if ($request->has('filter')) {
             $filters = $request->filter;
 
+            if (array_key_exists('taxpayer_id', $filters)) {
+                $query->where('taxpayer_id', '=', $filters['taxpayer_id']);
+            }
             if (array_key_exists('address', $filters)) {
                 $query->whereLike('address', $filters['address']);
+            }
+            if (array_key_exists('active', $filters)) {
+                $query->where('active', '=', $filters['active']);
             }
         }
 
@@ -47,12 +53,13 @@ class CubicleController extends Controller
         foreach($request->cubicles as $cubicle) {
             Cubicle::create([
                 'item_id' => $request->item_id,
-                'address' => $cubicle->address,
-                'created_by' => Auth::user()->id
+                'address' => $cubicle['address'],
+                'created_by' => Auth::user()->id,
+                'taxpayer_id' => $request->taxpayer_id
             ]);
         }
 
-        return response()->json(['success' => true], 200);
+        return response()->json(['success' => true, 'cubiclesCount' => count($request->cubicles)], 200);
     }
 
     /**

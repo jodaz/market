@@ -22,16 +22,16 @@ class Cubicle extends Model
 
     public function item()
     {
-        $this->belongsTo(Item::class);
+        return $this->belongsTo(Item::class);
     }
 
     public function createdBy()
     {
-        $this->belongsTo(User::class);
+        return $this->belongsTo(User::class);
     }
 
     public function taxpayer()
     {
-        $this->belongsTo(Taxpayer::class);
+        return $this->belongsTo(Taxpayer::class);
     }
 }

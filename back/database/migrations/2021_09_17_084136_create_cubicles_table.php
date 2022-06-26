@@ -19,8 +19,11 @@ class CreateCubiclesTable extends Migration
             $table->boolean('active')->default(true);
             $table->unsignedBigInteger('item_id');
             $table->unsignedBigInteger('created_by');
-            $table->foreign('item_id')->references('id')->on('items')
+            $table->unsignedBigInteger('taxpayer_id');
+            $table->foreign('taxpayer_id')->references('id')->on('taxpayers')
                 ->onUpdate('cascade')->onDelete('cascade');
+                $table->foreign('item_id')->references('id')->on('items')
+                    ->onUpdate('cascade')->onDelete('cascade');
             $table->foreign('created_by')->references('id')->on('users')
                 ->onUpdate('cascade')->onDelete('cascade');
             $table->timestamp('disincorporated_at')->nullable();
