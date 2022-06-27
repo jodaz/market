@@ -11,6 +11,7 @@ import Layout from './layout'
 import ItemsList from './pages/items/ItemList'
 import ItemEdit from './pages/items/ItemEdit'
 import ItemCreate from './pages/items/ItemCreate'
+import ItemShow from './pages/items/ItemShow'
 import UserList from './pages/users/UserList'
 import UserCreate from './pages/users/UserCreate'
 import UserEdit from './pages/users/UserEdit'
@@ -77,6 +78,14 @@ function App() {
                                     element={
                                         <Layout authorize='admin,usuario'>
                                             <ItemsList />
+                                        </Layout>
+                                    }
+                                />
+                                <Route
+                                    path="/items/:id"
+                                    element={
+                                        <Layout authorize='admin,usuario'>
+                                            <ItemShow />
                                         </Layout>
                                     }
                                 />

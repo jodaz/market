@@ -7,6 +7,7 @@ import { useNavigate, useParams } from 'react-router-dom'
 import axios from '../../api'
 import { useSnackbar } from 'notistack';
 import SelectItemInput from './SelectItemInput';
+import LoadingIndicator from '../../components/LoadingIndicator'
 
 const CubicleEdit = () => {
     const { id } = useParams();
@@ -39,7 +40,7 @@ const CubicleEdit = () => {
         fetchRecord()
     }, [])
 
-    if (!record) return null;
+    if (!record) return <LoadingIndicator />;
 
     return (
         <BaseForm

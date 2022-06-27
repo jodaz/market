@@ -13,6 +13,7 @@ import TableRow from '@mui/material/TableRow';
 import DeleteButton from '../../components/DeleteButton'
 import { useSnackbar } from 'notistack';
 import axios from '../../api'
+import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
 
 const headCells = [
     { 
@@ -22,10 +23,18 @@ const headCells = [
         label: 'Nombre',
     },
     { 
+        id: 'cubicles',
+        numeric: false,
+        disablePadding: true,
+        label: 'Nº de cubículos',
+        align: 'center'
+    },
+    { 
         id: 'actions',
         numeric: false,
         disablePadding: true,
         label: 'Acciones',
+        align: 'center'
     }
 ];
 
@@ -72,12 +81,26 @@ const ItemList = () => {
                     id={`${row.id}`}
                     scope="row"
                     padding="normal"
-                    width='100%'
+                    width='70%'
                 >
                     {row.name}
                 </TableCell>
-                <TableCell scope="row" align='right'>
+                <TableCell
+                    component="th"
+                    id={`${row.id}`}
+                    scope="row"
+                    padding="normal"
+                    align='center'
+                    width='20%'
+                >
+                    {row.cubicles_count}
+                </TableCell>
+                <TableCell scope="row" align='right' width='10%'>
                     <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+                        <LinkIconButton
+                            href={`/items/${row.id}`} 
+                            icon={<RemoveRedEyeIcon />}
+                        />
                         <LinkIconButton href={`/items/${row.id}/edit`} />
                         <DeleteButton
                             title={`¿Está seguro que desea eliminar el rubro "${row.name}"?`}

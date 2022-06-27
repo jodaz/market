@@ -16,6 +16,7 @@ class Cubicle extends Model
         'item_id',
         'address',
         'taxpayer_id',
+        'active',
         'created_by',
         'disincorporated_at'
     ];

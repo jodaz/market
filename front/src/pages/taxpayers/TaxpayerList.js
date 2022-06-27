@@ -36,6 +36,7 @@ const headCells = [
         numeric: false,
         disablePadding: true,
         label: 'Acciones',
+        align: 'center'
     }
 ];
 

@@ -15,7 +15,7 @@ class ItemController extends Controller
      */
     public function index(Request $request)
     {
-        $query = Item::query();
+        $query = Item::query()->withCount('cubicles');
         $results = $request->perPage;
         $sort = $request->sort;
         $order = $request->order;
@@ -43,7 +43,7 @@ class ItemController extends Controller
      */
     public function show(Item $item)
     {
-        return $item;
+        return $item->loadCount('cubicles');
     }
 
     /**

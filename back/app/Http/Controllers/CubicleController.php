@@ -28,6 +28,9 @@ class CubicleController extends Controller
             if (array_key_exists('taxpayer_id', $filters)) {
                 $query->where('taxpayer_id', '=', $filters['taxpayer_id']);
             }
+            if (array_key_exists('item_id', $filters)) {
+                $query->where('item_id', '=', $filters['item_id']);
+            }
             if (array_key_exists('address', $filters)) {
                 $query->whereLike('address', $filters['address']);
             }
@@ -71,7 +74,7 @@ class CubicleController extends Controller
      */
     public function show(Cubicle $cubicle)
     {
-        return $cubicle->load('taxpayer');
+        return $cubicle->load('taxpayer', 'item');
     }
 
     /**
@@ -104,6 +107,7 @@ class CubicleController extends Controller
     public function destroy(Cubicle $cubicle)
     {
         $cubicle->update([
+            'active' => false,
             'disincorporated_at' => Carbon::now()
         ]);
 
