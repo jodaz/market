@@ -17,7 +17,7 @@ class StatisticsController extends Controller
     public function __invoke(Request $request)
     {
         $taxpayers = Taxpayer::count();
-        $cubicles = Cubicle::count();
+        $cubicles = Cubicle::where('active', '=', true)->count();
 
         return response()->json([
             'taxpayers' => $taxpayers,
