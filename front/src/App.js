@@ -26,6 +26,7 @@ import RoleList from './pages/roles/RoleList'
 import RoleCreate from './pages/roles/RoleCreate'
 import RoleEdit from './pages/roles/RoleEdit'
 import Security from './pages/account/Security';
+import NotFound from './pages/404';
 
 function App() {
     return (
@@ -35,6 +36,8 @@ function App() {
                     <AdminProvider>
                         <AuthProvider>
                             <Routes>
+                                <Route path='*' element={<NotFound />} />
+                                
                                 <Route path='/login' element={<Login />} />
                                 <Route
                                     path="/"
