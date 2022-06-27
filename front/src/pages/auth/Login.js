@@ -8,7 +8,7 @@ import InputContainer from '../../components/InputContainer'
 import axios from '../../api'
 import { useNavigate } from 'react-router-dom'
 import { useAuth, loginUser } from '../../context/AuthContext'
-import fondo from '../../images/Fondo.png'
+import fondo from '../../images/Fondo.jpg'
 
 const validate = (values) => {
     const errors = {};

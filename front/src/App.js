@@ -42,7 +42,7 @@ function App() {
                                 <Route
                                     path="/"
                                     element={
-                                        <Layout authorize='admin,user'>
+                                        <Layout authorize='admin,usuario'>
                                             <Dashboard />
                                         </Layout>
                                     }
@@ -50,7 +50,7 @@ function App() {
                                 <Route
                                     path="/cubicles"
                                     element={
-                                        <Layout authorize='admin,user'>
+                                        <Layout authorize='admin,usuario'>
                                             <CubicleList />
                                         </Layout>
                                     }
@@ -58,7 +58,7 @@ function App() {
                                 <Route
                                     path="/cubicles/:id/create"
                                     element={
-                                        <Layout authorize='admin,user'>
+                                        <Layout authorize='admin,usuario'>
                                             <CubicleCreate />
                                         </Layout>
                                     }
@@ -66,7 +66,7 @@ function App() {
                                 <Route
                                     path="/items"
                                     element={
-                                        <Layout authorize='admin,user'>
+                                        <Layout authorize='admin,usuario'>
                                             <ItemsList />
                                         </Layout>
                                     }
@@ -74,7 +74,7 @@ function App() {
                                 <Route
                                     path="/taxpayers"
                                     element={
-                                        <Layout authorize='admin,user'>
+                                        <Layout authorize='admin,usuario'>
                                             <TaxpayerList />
                                         </Layout>
                                     }
@@ -82,7 +82,7 @@ function App() {
                                 <Route
                                     path="/taxpayers/:id"
                                     element={
-                                        <Layout authorize='admin,user'>
+                                        <Layout authorize='admin,usuario'>
                                             <TaxpayerShow />
                                         </Layout>
                                     }
@@ -90,7 +90,7 @@ function App() {
                                 <Route
                                     path="/taxpayers/:id/edit"
                                     element={
-                                        <Layout authorize='admin,user'>
+                                        <Layout authorize='admin,usuario'>
                                             <TaxpayerEdit />
                                         </Layout>
                                     }
@@ -98,7 +98,7 @@ function App() {
                                 <Route
                                     path="/taxpayers/create"
                                     element={
-                                        <Layout authorize='admin,user'>
+                                        <Layout authorize='admin,usuario'>
                                             <TaxpayerCreate />
                                         </Layout>
                                     }
@@ -154,7 +154,7 @@ function App() {
                                 <Route
                                     path="/items/:id/edit"
                                     element={
-                                        <Layout authorize='admin,user'>
+                                        <Layout authorize='admin,usuario'>
                                             <ItemEdit />
                                         </Layout>
                                     }
@@ -162,7 +162,7 @@ function App() {
                                 <Route
                                     path="/items/create"
                                     element={
-                                        <Layout authorize='admin,user'>
+                                        <Layout authorize='admin,usuario'>
                                             <ItemCreate />
                                         </Layout>
                                     }
@@ -170,7 +170,7 @@ function App() {
                                 <Route
                                     path="/security"
                                     element={
-                                        <Layout authorize='admin,user'>
+                                        <Layout authorize='admin,usuario'>
                                             <Security />
                                         </Layout>
                                     }
