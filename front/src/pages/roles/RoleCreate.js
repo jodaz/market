@@ -7,7 +7,7 @@ import axios from '../../api'
 import { useNavigate } from 'react-router-dom'
 import { useSnackbar } from 'notistack';
 
-const ItemCreate = () => {
+const RoleCreate = () => {
     const navigate = useNavigate()
     const { enqueueSnackbar } = useSnackbar();
 
@@ -44,4 +44,4 @@ const ItemCreate = () => {
     )
 }
 
-export default ItemCreate
+export default RoleCreate

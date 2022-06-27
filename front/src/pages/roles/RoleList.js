@@ -114,7 +114,7 @@ const RoleList = () => {
                     <ButtonLink
                         color="primary"
                         variant="contained"
-                        to="/items/create"
+                        to="/roles/create"
                     />
                 </Box>
             </Box>

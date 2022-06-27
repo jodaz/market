@@ -31,10 +31,11 @@ class AuthController extends Controller
 
         $token = $user->createToken('qwerty123');
 
+        $user->roles = $user->roles()->pluck('name');
+
         return [
             'token' => $token->plainTextToken,
-            'user' => $user,
-            'roles' => $user->roles
+            'user' => $user
         ];
     }
 

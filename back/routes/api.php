@@ -27,11 +27,13 @@ use App\Http\Controllers\StatisticsController;
 */
 
 Route::middleware('auth:sanctum')->group(function () {
-    Route::resource('/users', UserController::class);
+    Route::group(['middleware' => ['role:admin']], function () {
+        Route::resource('/users', UserController::class);
+        Route::resource('/roles', RoleController::class);
+    });
     Route::resource('/items', ItemController::class);
     Route::resource('/taxpayers', TaxpayerController::class);
     Route::resource('/cubicles', CubicleController::class);
-    Route::resource('/roles', RoleController::class);
     Route::get('/logout', [AuthController::class, 'logout']);
     Route::post('/security', UpdatePasswordController::class);
     Route::get('/statistics', StatisticsController::class);

@@ -2,9 +2,10 @@ import * as React from 'react'
 import Box from '@mui/material/Box'
 import Drawer from './Drawer'
 import PrivateRoute from '../components/PrivateRoute'
+import AuthenticatedRoute from '../components/AuthenticatedRoute'
 
-const Layout = ({ children }) => (
-    <PrivateRoute>
+const Layout = ({ children, authorize }) => (
+    <AuthenticatedRoute>
         <Box display="flex">
             <Drawer />
             <Box sx={{
@@ -13,10 +14,12 @@ const Layout = ({ children }) => (
                 padding: '1rem',
                 width: '100%'
             }}>
-                {children}
+                <PrivateRoute authorize={authorize}>
+                    {children}
+                </PrivateRoute>
             </Box>
         </Box>
-    </PrivateRoute>
+    </AuthenticatedRoute>
 )
 
 export default Layout

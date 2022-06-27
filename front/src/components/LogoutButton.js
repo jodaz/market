@@ -5,14 +5,17 @@ import Logout from '@mui/icons-material/Logout';
 import ListItem from '@mui/material/ListItem';
 import axios from '../api'
 import { useAuth, logout } from '../context/AuthContext'
+import { useNavigate } from 'react-router-dom';
 
 export default function LogoutButton() {
     const { dispatch } = useAuth();
+    const navigate = useNavigate();
 
     const handleClick = React.useCallback(async () => {
         try {
-            await axios.get('/logout')
             logout(dispatch);
+            navigate('/login', { replace: true })
+            await axios.get('/logout')
         } catch (e) {
             console.log(e)
         }
