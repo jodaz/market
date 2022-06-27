@@ -17,6 +17,10 @@ import AccountMenu from './AccountMenu'
 import LogoutButton from '../components/LogoutButton';
 import PeopleIcon from '@mui/icons-material/People';
 import GoBackButton from './GoBackButton'
+import PrivateRoute from '../components/PrivateRoute';
+import { useNavigate } from 'react-router-dom'
+import { alpha } from '@mui/material';
+import ArticleIcon from '@mui/icons-material/Article';
 
 const drawerWidth = 240;
 
@@ -26,6 +30,7 @@ function ResponsiveDrawer() {
     });
     const [mobileOpen, setMobileOpen] = React.useState(false);
     const { state: AdminState } = useAdmin()
+    const navigate = useNavigate();
 
     const handleDrawerToggle = () => {
         setMobileOpen(!mobileOpen);
@@ -37,7 +42,21 @@ function ResponsiveDrawer() {
 
     const drawer = (
         <div>
-            <Toolbar />
+            <Box onClick={() => navigate('/')} sx={{
+                padding: '1rem 0',
+                display: 'flex',
+                fontWeight: 600,
+                justifyContent: 'center',
+                fontSize: '1.75rem',
+                color: theme => theme.palette.primary.main,
+                cursor: 'pointer',
+                transition: '0.3s',
+                '&:hover': {
+                    backgroundColor: theme => alpha(theme.palette.text.primary, 0.05)
+                }
+            }}>
+                Market
+            </Box>
             <Divider />
             <List>
                 {routes.map((route, index) => (
@@ -48,22 +67,29 @@ function ResponsiveDrawer() {
                         key={index}
                     />
                 ))}
-                <Submenu
-                    handleToggle={() => handleToggle('administration')}
-                    isOpen={state.administration}
-                    sidebarIsOpen={true}
-                    name='Administración'
-                    icon={<PeopleIcon />}
-                >
-                    {adminRoutes.map((route, index) => (
-                        <ListItemLink
-                            primary={route.name}
-                            to={route.route}
-                            icon={route.icon}
-                            key={index}
-                        />
-                    ))}
-                </Submenu>
+                <PrivateRoute authorize='admin' unauthorized={null}>
+                    <Submenu
+                        handleToggle={() => handleToggle('administration')}
+                        isOpen={state.administration}
+                        sidebarIsOpen={true}
+                        name='Administración'
+                        icon={<PeopleIcon />}
+                    >
+                        {adminRoutes.map((route, index) => (
+                            <ListItemLink
+                                primary={route.name}
+                                to={route.route}
+                                icon={route.icon}
+                                key={index}
+                            />
+                        ))}
+                    </Submenu>
+                </PrivateRoute>
+                <ListItemLink
+                    primary='Manual'
+                    to='/docs'
+                    icon={<ArticleIcon />}
+                />
                 <LogoutButton />
             </List>
             <Divider />

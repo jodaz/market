@@ -29,6 +29,7 @@ import RoleEdit from './pages/roles/RoleEdit'
 import Security from './pages/account/Security';
 import NotFound from './pages/404';
 import CubicleEdit from './pages/cubicles/CubicleEdit';
+import Docs from './pages/Docs';
 
 function App() {
     return (
@@ -190,6 +191,14 @@ function App() {
                                     element={
                                         <Layout authorize='admin,usuario'>
                                             <Security />
+                                        </Layout>
+                                    }
+                                />
+                                <Route
+                                    path="/docs"
+                                    element={
+                                        <Layout authorize='admin,usuario'>
+                                            <Docs />
                                         </Layout>
                                     }
                                 />

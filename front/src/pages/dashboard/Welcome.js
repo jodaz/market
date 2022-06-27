@@ -2,6 +2,15 @@ import Box from '@mui/material/Box'
 import dtiLogo from '../../images/DTI2.png'
 import mayorLogo from '../../images/mayorLogo.png'
 
+const Strong = ({ children }) => (
+    <Box component='span' sx={{
+        color: theme => theme.palette.primary.main,
+        fontWeight: 900
+    }}>
+        {children}
+    </Box>
+)
+
 const Welcome = () => {
     return (
         <Box sx={{
@@ -13,7 +22,7 @@ const Welcome = () => {
             flexDirection: 'column'
         }}>
             <Box width='100%'>
-                ¡Bienvenido a Tamarco!
+                ¡Bienvenido a <Strong>T</Strong>amarco!
             </Box>
             <Box sx={{
                 paddingTop: '2rem',

@@ -76,7 +76,10 @@ const CubicleList = ({ initialValues, createButton, showTaxpayer }) => {
         const { data } = await axios.delete(`/cubicles/${values.id}`);
 
         if (data) {
-            setItems(prevItems => [...prevItems.filter(({ id }) => id != data.id)])
+            setItems(prevItems => [
+                ...prevItems.filter(({ id }) => id != data.id),
+                data  
+            ])
             enqueueSnackbar(
                 `¡Ha desincorporado el cubículo "${data.address}"`, 
                 { variant: 'success' }
@@ -134,10 +137,12 @@ const CubicleList = ({ initialValues, createButton, showTaxpayer }) => {
                 >
                     <Box sx={{ display: 'flex', justifyContent: 'center' }}>
                         <LinkIconButton href={`/cubicles/${row.id}/edit`} />
-                        <DeleteButton
-                            title={`¿Está seguro que desea desincorporar el cubículo "${row.address}"?`}
-                            onClick={() => handleDelete(row)}
-                        />
+                        {row.active ? (
+                            <DeleteButton
+                                title={`¿Está seguro que desea desincorporar el cubículo "${row.address}"?`}
+                                onClick={() => handleDelete(row)}
+                            />
+                        ) : null}
                     </Box>
                 </TableCell>
             </TableRow>

@@ -1,9 +1,8 @@
 import * as React from 'react'
 import { useAuth } from '../context/AuthContext'
-import Unauthorized from '../pages/Unauthorized';
 import LoadingIndicator from './LoadingIndicator'
 
-const PrivateRoute = ({ children, authorize = null }) => {
+const PrivateRoute = ({ children, authorize = null, unauthorized: Unauthorized }) => {
     const { state: { user } } = useAuth();
     const [authorized, setAuthorized] = React.useState(null);
 
@@ -19,11 +18,9 @@ const PrivateRoute = ({ children, authorize = null }) => {
         }
     }, [authorize])
 
-    console.log(authorized)
-
     if (authorized == null) return <LoadingIndicator />;
 
-    if (authorized == false) return <Unauthorized />;
+    if (authorized == false) return Unauthorized;
 
     return children;
 };

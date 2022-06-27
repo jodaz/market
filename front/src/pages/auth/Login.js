@@ -107,6 +107,9 @@ const Login = () => {
                                         type="submit"
                                         color='primary'
                                         variant="contained"
+                                        sx={{
+                                            textTransform: 'uppercase'
+                                        }}
                                         fullWidth
                                     >
                                         Acceder

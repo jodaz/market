@@ -90,6 +90,7 @@ class CubicleController extends Controller
 
         $newCubicle->item_id = $request->item_id;
         $newCubicle->address = $request->address;
+        $newCubicle->active = true;
         $newCubicle->save();
 
         $cubicle->active = false;
@@ -111,6 +112,6 @@ class CubicleController extends Controller
             'disincorporated_at' => Carbon::now()
         ]);
 
-        return $cubicle;
+        return $cubicle->load('taxpayer', 'item');
     }
 }

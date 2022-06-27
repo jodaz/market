@@ -41,7 +41,7 @@ export default function AccountMenu() {
                         {user.names[0]}
                     </Avatar>
                     <Box sx={{
-                        color: theme => theme.palette.text.secondary,
+                        color: '#fff',
                         fontWeight: '900',
                         marginLeft: '1rem',
                         fontSize: '1rem',

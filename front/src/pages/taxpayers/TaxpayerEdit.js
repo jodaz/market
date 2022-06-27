@@ -20,7 +20,7 @@ const TaxpayerEdit = () => {
             const { data } = await axios.put(`/taxpayers/${id}`, values)
 
             if (data) {
-                navigate('/taxpayers')
+                navigate(-1)
                 enqueueSnackbar(
                     `¡Ha actualizado el contribuyente "${data.name}"`,  
                     { variant: 'success' }

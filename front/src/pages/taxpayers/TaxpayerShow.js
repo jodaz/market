@@ -2,7 +2,6 @@ import * as React from 'react'
 import Box from '@mui/material/Box'
 import { useParams } from 'react-router-dom'
 import axios from '../../api'
-import AssignmentIndIcon from '@mui/icons-material/AssignmentInd';
 import LocalPhoneIcon from '@mui/icons-material/LocalPhone';
 import TextField from '../../components/TextField';
 import EmailIcon from '@mui/icons-material/Email';
@@ -10,6 +9,7 @@ import LinkIconButton from '../../components/LinkIconButton';
 import LoadingIndicator from '../../components/LoadingIndicator'
 import { setTitle, useAdmin } from '../../context/AdminContext'
 import CubicleList from '../cubicles/CubicleList';
+import LocationOnIcon from '@mui/icons-material/LocationOn';
 
 const TaxpayerShow = () => {
     const { dispatch } = useAdmin()
@@ -62,7 +62,7 @@ const TaxpayerShow = () => {
                     }}>
                         <TextField
                             source={record.address}
-                            icon={<AssignmentIndIcon />}
+                            icon={<LocationOnIcon />}
                         />
                         {record.phone && (
                             <TextField
