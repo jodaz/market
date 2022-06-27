@@ -27,6 +27,7 @@ import RoleCreate from './pages/roles/RoleCreate'
 import RoleEdit from './pages/roles/RoleEdit'
 import Security from './pages/account/Security';
 import NotFound from './pages/404';
+import CubicleEdit from './pages/cubicles/CubicleEdit';
 
 function App() {
     return (
@@ -60,6 +61,14 @@ function App() {
                                     element={
                                         <Layout authorize='admin,usuario'>
                                             <CubicleCreate />
+                                        </Layout>
+                                    }
+                                />
+                                <Route
+                                    path="/cubicles/:id/edit"
+                                    element={
+                                        <Layout authorize='admin,usuario'>
+                                            <CubicleEdit />
                                         </Layout>
                                     }
                                 />

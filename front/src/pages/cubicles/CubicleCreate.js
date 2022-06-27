@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { validateItem } from './cubicleValidations';
+import { createCubicle } from './cubicleValidations';
 import TextInput from '../../components/TextInput'
 import axios from '../../api'
 import { useNavigate, useParams } from 'react-router-dom'
@@ -59,7 +59,7 @@ const CubicleCreate = () => {
             <Box component='div' paddingTop='2rem'  width='100%'>
                 <Form
                     onSubmit={save}
-                    validate={validateItem}
+                    validate={createCubicle}
                     initialValues={{
                         cubicles: [{}]
                     }}

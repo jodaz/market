@@ -16,7 +16,8 @@ class CubicleController extends Controller
      */
     public function index(Request $request)
     {
-        $query = Cubicle::query()->with('taxpayer', 'item');
+        $query = Cubicle::query()->with('taxpayer', 'item')
+            ->orderBy('active', 'DESC');
         $results = $request->perPage;
         $sort = $request->sort;
         $order = $request->order;
@@ -84,9 +85,12 @@ class CubicleController extends Controller
     {
         $newCubicle = $cubicle->replicate();
 
-        $cubicle->update(['active' => false]);
+        $newCubicle->item_id = $request->item_id;
+        $newCubicle->address = $request->address;
+        $newCubicle->save();
 
-        $newCubicle->update($request->all());
+        $cubicle->active = false;
+        $cubicle->save();
 
         return $newCubicle;
     }

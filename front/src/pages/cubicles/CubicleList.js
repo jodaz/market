@@ -19,7 +19,7 @@ const headCells = [
         id: 'address',
         numeric: false,
         disablePadding: true,
-        label: 'Nombre',
+        label: 'Dirección',
     },
     { 
         id: 'taxpayer',
@@ -34,19 +34,20 @@ const headCells = [
         label: 'Rubro',
     },
     { 
+        id: 'status',
+        numeric: false,
+        disablePadding: true,
+        label: 'Estado',
+        align: 'right'
+    },
+    { 
         id: 'actions',
         numeric: false,
         disablePadding: true,
         label: 'Acciones',
+        align: 'center'
     }
 ];
-
-const optionalHeader = { 
-    id: 'taxpayer',
-    numeric: false,
-    disablePadding: true,
-    label: 'Contribuyente',
-};
 
 const CubicleList = ({ initialValues, createButton, showTaxpayer }) => {
     const isSmall = useMediaQuery(theme =>
@@ -91,7 +92,7 @@ const CubicleList = ({ initialValues, createButton, showTaxpayer }) => {
                     id={row.id}
                     scope="row"
                     padding="normal"
-                    width='50%'
+                    width='40%'
                 >
                     {row.address}
                 </TableCell>
@@ -110,8 +111,21 @@ const CubicleList = ({ initialValues, createButton, showTaxpayer }) => {
                     scope="row"
                     padding="normal"
                     width='10%'
+                    textAlign='center'
                 >
                     {row.item.name}
+                </TableCell>
+                <TableCell
+                    component="th"
+                    id={row.id}
+                    scope="row"
+                    padding="normal"
+                    width='10%'
+                    sx={{
+                        textAlign: 'center'
+                    }}
+                >
+                    {row.active ? 'Activo' : 'Desincorporado'}
                 </TableCell>
                 <TableCell
                     scope="row"
