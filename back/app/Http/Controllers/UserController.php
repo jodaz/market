@@ -15,6 +15,8 @@ use App\Models\User;
 use Auth;
 use Hash;
 // use PDF;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rule;
 
 class UserController extends Controller
 {
@@ -126,7 +128,32 @@ class UserController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        $user->update($request->all());
+        $validator = Validator::make($request->all(), [
+            'identity_card' => [
+                'required',
+                'min:8',
+                Rule::unique('users')->ignore($user),
+            ],
+            'names' => 'required',
+            'surnames' => 'required',
+            'login' => [
+                'required',
+                Rule::unique('users')->ignore($user),
+            ],
+        ], [
+            'identity_card.required' => 'Ingrese la cédula',
+            'first_name.required' => 'Ingrese el nombre',
+            'surname.required' => 'Ingrese el apellido',
+            'login.required' => 'Ingrese el nombre de usuario.',
+            'identity_card.unique' => 'La cédula se encuentra en uso',
+            'login.unique' => 'El nombre de usuario se encuentra en uso',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'errors' => $validator->errors()
+            ], 422);
+        }
 
         $user->roles()->sync($request->roles);
 

@@ -5,8 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Taxpayer;
 use Illuminate\Http\Request;
 use App\Http\Requests\TaxpayersCreateRequest;
-use App\Http\Requests\TaxpayersUpdateRequest;
 // use PDF;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rule;
 
 class TaxpayerController extends Controller
 {
@@ -95,9 +96,28 @@ class TaxpayerController extends Controller
      * @param  \App\Taxpayer  $taxpayer
      * @return \Illuminate\Http\Response
      */
-    public function update(TaxpayersUpdateRequest $request, Taxpayer $taxpayer)
+    public function update(Request $request, Taxpayer $taxpayer)
     {
-        $taxpayer->update($request->all());
+        $validator = Validator::make($request->all(), [
+            'rif' => [
+                'required',
+                'min:8',
+                Rule::unique('taxpayers')->ignore($taxpayer->id),
+            ],
+            'name' => 'required',
+            'address' => 'required'
+        ], [
+            'name.required' => 'Ingrese el nombre',
+            'address.required' => 'Ingrese la dirección',
+            'rif.required' => 'Ingrese el RIF',
+            'rif.unique' => 'El RIF ingresado ya se encuentra registrado.',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'errors' => $validator->errors()
+            ], 422);
+        }
 
         return response()->json($taxpayer, 200);
     }

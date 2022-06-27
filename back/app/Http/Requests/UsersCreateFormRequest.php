@@ -24,7 +24,7 @@ class UsersCreateFormRequest extends FormRequest
     public function rules()
     {
         return [
-            'identity_card' => 'required',
+            'identity_card' => 'required|unique:users',
             'names' => 'required',
             'password' => 'required',
             'surnames' => 'required',
@@ -51,6 +51,7 @@ class UsersCreateFormRequest extends FormRequest
             'password.required' => 'Ingrese la :attribute',
             'surname.required' => 'Ingrese el :attribute',
             'login.required' => 'Ingrese el :attribute',
+            'identity_card.unique' => 'El :attribute se encuentra en uso',
             'login.unique' => 'El :attribute se encuentra en uso',
         ];
     }
