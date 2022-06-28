@@ -18,7 +18,7 @@ const SubMenu = ({
 }) => {
     const header = (
         <ListItem button onClick={handleToggle}>
-            <ListItemIcon>
+            <ListItemIcon sx={{ color: theme => theme.palette.primary.main }}>
             {icon}
             </ListItemIcon>
             {name}

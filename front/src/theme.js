@@ -1,5 +1,5 @@
 import { createTheme } from '@mui/material/styles';
-import { blue, grey, blueGrey } from '@mui/material/colors';
+import { blue, grey, blueGrey, red } from '@mui/material/colors';
 
 const theme = createTheme({
     palette: {
@@ -11,6 +11,9 @@ const theme = createTheme({
         },
         text: {
             primary: blueGrey[900]
+        },
+        error: {
+            main: red[500]
         }
     },
     components: {
@@ -22,7 +25,7 @@ const theme = createTheme({
                     textTransform: 'unset'
                 }
             }
-        }
+        },
     }
 });
 

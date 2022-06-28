@@ -1,6 +1,5 @@
 import * as React from 'react';
 import Box from '@mui/material/Box'
-import { useNavigate } from 'react-router-dom'
 import { Link } from '@mui/material';
 
 const Docs = () => (
@@ -17,7 +16,7 @@ const Docs = () => (
                 fontSize: '2rem',
             }}
         >
-            Tamarco V.1
+            {process.env.REACT_APP_NAME} V.1
         </Box>
         <Box sx={{
             display: 'flex',

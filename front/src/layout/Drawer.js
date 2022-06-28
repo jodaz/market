@@ -55,9 +55,8 @@ function ResponsiveDrawer() {
                     backgroundColor: theme => alpha(theme.palette.text.primary, 0.05)
                 }
             }}>
-                Market
+                {process.env.REACT_APP_NAME}
             </Box>
-            <Divider />
             <List>
                 {routes.map((route, index) => (
                     <ListItemLink
@@ -90,9 +89,9 @@ function ResponsiveDrawer() {
                     to='/docs'
                     icon={<ArticleIcon />}
                 />
+                <Divider />
                 <LogoutButton />
             </List>
-            <Divider />
         </div>
     );
 

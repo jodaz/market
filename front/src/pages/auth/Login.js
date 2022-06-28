@@ -55,6 +55,7 @@ const Login = () => {
             width: '100%',
             height: '100%',
             background: `url(${fondo}) no-repeat center center fixed`,
+            backgroundColor: theme => theme.palette.primary.main,
             backgroundSize: 'cover'
         }}>
             <Box
@@ -72,11 +73,20 @@ const Login = () => {
                     render={ ({ handleSubmit, submitting }) => (
                         <form onSubmit={handleSubmit}>
                             <Box
-                                height='15rem'
+                                height='18rem'
                                 display='flex'
                                 flexDirection='column'
                                 justifyContent='space-between'
                             >
+                                <Box sx={{
+                                    fontSize: '2rem',
+                                    fontWeight: 600,
+                                    color: theme => theme.palette.primary.main,
+                                    textAlign: 'center',
+                                    padding: '0.25rem 0'
+                                }}>
+                                    {process.env.REACT_APP_NAME}
+                                </Box>
                                 <Box>
                                     <InputContainer label='Usuario' md={12}>
                                         <TextInput

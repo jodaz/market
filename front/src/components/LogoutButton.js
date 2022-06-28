@@ -24,8 +24,13 @@ export default function LogoutButton() {
 
     return (
         <ListItem button onClick={handleClick}>
-            <ListItemIcon><Logout /></ListItemIcon>
-            <ListItemText primary='Cerrar sesión' />
+            <ListItemIcon sx={{ color: theme => theme.palette.error.main }}>
+                <Logout />
+            </ListItemIcon>
+            <ListItemText
+                primary='Cerrar sesión'
+                sx={{ color: theme => theme.palette.error.main }}
+            />
         </ListItem>
     );
 }

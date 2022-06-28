@@ -22,7 +22,7 @@ const Welcome = () => {
             flexDirection: 'column'
         }}>
             <Box width='100%'>
-                ¡Bienvenido a <Strong>T</Strong>amarco!
+                ¡Bienvenido a <Strong>{process.env.REACT_APP_NAME.slice(0, 1)}</Strong>{process.env.REACT_APP_NAME.slice(1)}!
             </Box>
             <Box sx={{
                 paddingTop: '2rem',
