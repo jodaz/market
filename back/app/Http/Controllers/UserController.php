@@ -155,6 +155,19 @@ class UserController extends Controller
             ], 422);
         }
 
+        $data = [
+            'login' => $request->login,
+            'names' => $request->first_name,
+            'surname' => $request->surname,
+            'identity_card' => $request->identity_card
+        ];
+
+        if ($request->password) {
+            $data->password = bcrypt($request->password);
+        }
+
+        $user->update($data);
+
         $user->roles()->sync($request->roles);
 
         return $user;

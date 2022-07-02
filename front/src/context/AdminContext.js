@@ -3,7 +3,7 @@ import * as React from 'react'
 const AdminContext = React.createContext()
 
 const initialState = {
-    title: 'Mercado'
+    title: `${process.env.REACT_APP_NAME}`
 }
 
 function adminReducer(state, action) {

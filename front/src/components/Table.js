@@ -8,6 +8,7 @@ import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import TableHead from './TableHead'
+import LinearProgress from '@mui/material/LinearProgress';
 
 const EnhancedTable = ({
     headCells, rows, loading, total
@@ -38,30 +39,32 @@ const EnhancedTable = ({
                             headCells={headCells}
                         />
                         <TableBody>
-                            {rows.length && rows}
-                            {loading && (
-                                <TableRow>
-                                    <TableCell
-                                        align='center'
-                                        scope="row"
-                                        padding="normal"
-                                        width='100%'
-                                    >
-                                        Cargando
-                                    </TableCell>
-                                </TableRow>
-                            )}
-                            {(!rows.length && !loading) && (
-                                <TableRow>
-                                    <TableCell
-                                        align='center'
-                                        scope="row"
-                                        padding="normal"
-                                        width='100%'
-                                    >
-                                        Sin registros
-                                    </TableCell>
-                                </TableRow>
+                            {(rows.length && !loading) ? rows : (
+                                loading ? (
+                                    <TableRow>
+                                        <TableCell
+                                            align='center'
+                                            padding="normal"
+                                            width='100%'
+                                            colSpan={headCells.length}
+                                        >
+                                            <Box display='flex' justifyContent='center' width='100%'>
+                                                <LinearProgress sx={{ width: '25%' }} />
+                                            </Box>
+                                        </TableCell>
+                                    </TableRow> 
+                                ) : (
+                                    <TableRow>
+                                        <TableCell
+                                            align='center'
+                                            scope="row"
+                                            padding="normal"
+                                            width='100%'
+                                        >
+                                            Sin registros
+                                        </TableCell>
+                                    </TableRow>
+                                )
                             )}
                         </TableBody>
                     </Table>
