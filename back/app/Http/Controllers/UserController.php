@@ -157,13 +157,13 @@ class UserController extends Controller
 
         $data = [
             'login' => $request->login,
-            'names' => $request->first_name,
-            'surname' => $request->surname,
+            'names' => $request->names,
+            'surnames' => $request->surnames,
             'identity_card' => $request->identity_card
         ];
 
         if ($request->password) {
-            $data->password = bcrypt($request->password);
+            $data["password"] = bcrypt($request->password);
         }
 
         $user->update($data);
@@ -173,17 +173,12 @@ class UserController extends Controller
         return $user;
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(User $user)
+    public function updateStatus(User $user)
     {
-        $destroy  = User::find($user->id);
-        $destroy->active=0;
+        $user->update([
+            'active' => !$user->active
+        ]);
 
-        $destroy->save();
+        return $user;
     }
 }

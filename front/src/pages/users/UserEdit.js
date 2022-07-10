@@ -10,6 +10,7 @@ import PasswordInput from '../../components/PasswordInput'
 import { useSnackbar } from 'notistack';
 import SelectRolesInput from './SelectRolesInput';
 import { identityCard } from './userTextFormats'
+import LoadingIndicator from '../../components/LoadingIndicator'
 
 const UserEdit = () => {
     const { id } = useParams();
@@ -45,7 +46,7 @@ const UserEdit = () => {
         fetchRecord()
     }, [])
 
-    if (!record) return null;
+    if (!record) return <LoadingIndicator />;
 
     return (
         <BaseForm

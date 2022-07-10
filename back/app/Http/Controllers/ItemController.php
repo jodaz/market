@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Item;
 use Illuminate\Http\Request;
 use App\Http\Requests\ItemCreateRequest;
+use PDF;
 
 class ItemController extends Controller
 {
@@ -32,8 +33,27 @@ class ItemController extends Controller
             $query->orderBy($sort, $order);
         }
 
+        if ($request->type == 'pdf') {
+            return $this->report($query);
+        }
+
         return $query->paginate($results);
     }
+
+    public function report($query)
+    {
+        // Prepare pdf
+        $models = $query->get();
+        $title = "Padrón de rubros";
+
+        $pdf = PDF::LoadView('pdf.reports.items', compact([
+            'models',
+            'title'
+        ]));
+
+        return $pdf->download();
+    }
+
 
     /**
      * Display the specified resource.
@@ -57,7 +77,6 @@ class ItemController extends Controller
         $item = Item::create($request->all());
 
         return response()->json($item, 201);
-
     }
 
     /**

@@ -43,7 +43,25 @@ class CubicleController extends Controller
             $query->orderBy($sort, $order);
         }
 
+        if ($request->type == 'pdf') {
+            return $this->report($query);
+        }
+
         return $query->paginate($results);
+    }
+
+    public function report($query)
+    {
+        // Prepare pdf
+        $models = $query->get();
+        $title = "Padrón de cubículos";
+
+        $pdf = PDF::LoadView('pdf.reports.cubicles', compact([
+            'models',
+            'title'
+        ]));
+
+        return $pdf->download();
     }
 
     /**

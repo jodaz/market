@@ -63,6 +63,7 @@ const CubicleShow = () => {
                     <LinkIconButton href={`/items/${record.id}/edit`} />
                 </Box>
             </Box>
+            <Box sx={{ fontWeight: 700, margin: '1rem 0', textTransform: 'uppercase', fontSize: '1.25rem' }}>Cubículos</Box>
             <CubicleList initialValues={{
                 item_id: id
             }} />

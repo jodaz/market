@@ -15,18 +15,25 @@ class AuthController extends Controller
         if (!$user) {
             return response()->json([
                 'errors' => [
-                    'login' => ['Login incorrecto']
+                    'login' => ['Login incorrecto.']
                 ]
-            ], 401);
+            ], 422);
+        }
+        if (!$user->active) {
+            return response()->json([
+                'errors' => [
+                    'login' => ['Usuario desactivado.']
+                ]
+            ], 422);
         }
 
         // Check password
-        if (!$user || !Hash::check($request->password, $user->password)) {
+        if (!Hash::check($request->password, $user->password)) {
             return response()->json([
                 'errors' => [
                     'password' => ['Contraseña incorrecta']
                 ]
-            ], 401);
+            ], 422);
         }
 
         $token = $user->createToken('qwerty123');

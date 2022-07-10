@@ -10,7 +10,10 @@ import ListContainer from '../../components/ListContainer';
 import LinkIconButton from '../../components/LinkIconButton';
 import TableCell from '@mui/material/TableCell';
 import TableRow from '@mui/material/TableRow';
-import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
+import { useAuth } from '../../context/AuthContext'
+import BlockButton from '../../components/BlockButton'
+import axios from '../../api'
+import { useSnackbar } from 'notistack';
 
 const headCells = [
     { 
@@ -20,16 +23,16 @@ const headCells = [
         label: 'Nombre',
     },
     { 
-        id: 'cedula',
-        numeric: false,
-        disablePadding: true,
-        label: 'Cédula',
-    },
-    { 
         id: 'login',
         numeric: false,
         disablePadding: true,
         label: 'Usuario',
+    },
+    { 
+        id: 'cedula',
+        numeric: false,
+        disablePadding: true,
+        label: 'Cédula',
     },
     { 
         id: 'actions',
@@ -43,6 +46,7 @@ const ItemList = () => {
     const isSmall = useMediaQuery(theme =>
         theme.breakpoints.down('sm')
     )
+    const { state: { user } } = useAuth();
     const [filter, setFilter] = React.useState({})
     const { loading, total, data } = useFetch('/users', {
         perPage: 10,
@@ -50,6 +54,7 @@ const ItemList = () => {
         filter: filter
     })
     const [items, setItems] = React.useState({})
+    const { enqueueSnackbar } = useSnackbar();
 
     const handleOnChange = (e) => {
         if (e.currentTarget.value) {
@@ -60,6 +65,21 @@ const ItemList = () => {
             setFilter({})
         }
     }
+
+    const handleUpdateStatus = React.useCallback(async (values) => {
+        const { data } = await axios.post(`/users/${values.id}/update-status`);
+
+        if (data) {
+            setItems(prevItems => [
+                data,
+                ...prevItems.filter(({ id }) => id != data.id)
+            ])
+            enqueueSnackbar(
+                `¡Ha ${data.active ? 'activado' : 'desactivado'} el usuario "${data.names}"`, 
+                { variant: 'success' }
+            );
+        }
+    }, [])
 
     const rowRender = () => (
         items.map(row => (
@@ -98,10 +118,13 @@ const ItemList = () => {
                 >
                     <Box display="flex" justifyContent={'center'}>
                         <LinkIconButton href={`/users/${row.id}/edit`} />
-                        <LinkIconButton
-                            href={`/users/${row.id}`} 
-                            icon={<RemoveRedEyeIcon />}
-                        />
+                        {(row.id != user.id) && (
+                            <BlockButton
+                                title={`¿Está seguro que desea desactivar el usuari "${row.login}"?`}
+                                onClick={() => handleUpdateStatus(row)}
+                                active={row.active}
+                            />
+                        )}
                     </Box>
                 </TableCell>
             </TableRow>

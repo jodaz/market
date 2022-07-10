@@ -28,8 +28,10 @@ use App\Http\Controllers\StatisticsController;
 
 Route::middleware('auth:sanctum')->group(function () {
     Route::group(['middleware' => ['role:admin']], function () {
-        Route::resource('/users', UserController::class);
+        Route::resource('/users', UserController::class)
+            ->except('destroy');
         Route::resource('/roles', RoleController::class);
+        Route::post('/users/{user}/update-status', [UserController::class, 'updateStatus']);
     });
     Route::resource('/items', ItemController::class);
     Route::resource('/taxpayers', TaxpayerController::class);

@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Taxpayer;
 use Illuminate\Http\Request;
 use App\Http\Requests\TaxpayersCreateRequest;
-// use PDF;
+use PDF;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 
@@ -20,6 +20,8 @@ class TaxpayerController extends Controller
     {
         $query = Taxpayer::latest();
         $results = $request->perPage;
+        $sort = $request->sort;
+        $order = $request->order;
 
         if ($request->has('filter')) {
             $filters = $request->filter;
@@ -42,6 +44,10 @@ class TaxpayerController extends Controller
             if (array_key_exists('id', $filters)) {
                 $query->find($filters['id']);
             }
+        }
+
+        if ($sort && $order) {
+            $query->orderBy($sort, $order);
         }
 
         if ($request->type == 'pdf') {
