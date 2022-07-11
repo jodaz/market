@@ -86,7 +86,7 @@ const ItemList = () => {
                     padding="normal"
                     width='70%'
                 >
-                    {row.id}
+                    {row.name}
                 </TableCell>
                 <TableCell
                     component="th"

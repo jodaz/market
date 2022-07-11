@@ -6,9 +6,10 @@
     <thead>
         <tr>
             <th width="5%">#</th>
-            <th width="45%">CONTRIBUYENTE</th>
+            <th width="35%">CONTRIBUYENTE</th>
             <th width="20%">DIRECCIÓN</th>
-            <th width="30%">NOMBRE</th>
+            <th width="15">ESTADO</th>
+            <th width="25%">RUBRO</th>
         </tr>
     </thead>
     <tbody>
@@ -17,6 +18,7 @@
         <td>{{ $index + 1 }}</td>
         <td>{{ $model->taxpayer->name }}</td>
         <td>{{ $model->address }}</td>
+        <td>{{ $model->active ? 'ACTIVO' : 'DESINCORPORADO' }}</td>
         <td>{{ $model->item->name }}</td>
     </tr>
     @endforeach
