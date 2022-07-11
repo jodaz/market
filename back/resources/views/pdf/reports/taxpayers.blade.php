@@ -17,7 +17,7 @@
         <td>{{ $index + 1 }}</td>
         <td>{{ $model->rif }}</td>
         <td>{{ $model->name }}</td>
-        <td>{{ $model->fiscal_address }}</td>
+        <td>{{ $model->address }}</td>
     </tr>
     @endforeach
 </table>
