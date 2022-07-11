@@ -14,6 +14,7 @@ import DeleteButton from '../../components/DeleteButton'
 import { useSnackbar } from 'notistack';
 import axios from '../../api'
 import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
+import PrintButton from '../../components/DownloadButton';
 
 const headCells = [
     { 
@@ -130,7 +131,21 @@ const ItemList = () => {
                         fullWidth
                     />
                 </Box>
-                <Box>
+                <Box sx={{
+                    display: 'flex',
+                    height: '2rem',
+                    width: '8rem',
+                    justifyContent: 'space-between',
+                }}>
+                    {total && (
+                        <PrintButton
+                            perPage={10}
+                            filter={filter}
+                            basePath='/items'
+                            filename='rubros.pdf'
+                            type='pdf'
+                        />
+                    )}
                     <ButtonLink
                         color="primary"
                         variant="contained"

@@ -128,7 +128,8 @@ const ItemList = () => {
                     </Box>
                 </TableCell>
             </TableRow>
-        )))
+        ))
+    )
 
     React.useEffect(() => setItems(data), [data])
 

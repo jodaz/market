@@ -84,7 +84,7 @@ const TaxpayerShow = () => {
             </Box>
             <CubicleList initialValues={{
                 taxpayer_id: id
-            }} createButton />
+            }} createButton title={`Cubículos del contribuyente "${record.name}"`} />
         </Box>
     )
 }

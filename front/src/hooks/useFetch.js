@@ -1,27 +1,6 @@
 import * as React from 'react'
 import axios from '../api'
-
-const getQueryFromParams = ({
-    perPage, page, sort, filter
-}) => {
-    const query = {
-        page: page + (-1),
-        perPage: perPage
-    }
-
-    // Add all filter params to query.
-    Object.keys(filter || {}).forEach((key) => {
-        query[`filter[${key}]`] = filter[key];
-    });
-
-    // Add sort parameter
-    if (sort && sort.field) {
-        query.sort = sort.field;
-        query.order = sort.order === 'ASC' ? 'asc' : 'desc';
-    }
-
-    return query;
-}
+import getQueryFromParams from '../utils/getQueryFromParams'
 
 const useFetch = (url, params) => {
     const [loading, setLoading] = React.useState(true)

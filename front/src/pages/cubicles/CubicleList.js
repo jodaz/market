@@ -13,6 +13,7 @@ import TableRow from '@mui/material/TableRow';
 import DeleteButton from '../../components/DeleteButton'
 import { useSnackbar } from 'notistack';
 import axios from '../../api'
+import PrintButton from '../../components/DownloadButton';
 
 const headCells = [
     { 
@@ -49,7 +50,7 @@ const headCells = [
     }
 ];
 
-const CubicleList = ({ initialValues, createButton, showTaxpayer }) => {
+const CubicleList = ({ initialValues, createButton, title = 'Padrón de cubículos' }) => {
     const isSmall = useMediaQuery(theme =>
         theme.breakpoints.down('sm')
     )
@@ -61,7 +62,6 @@ const CubicleList = ({ initialValues, createButton, showTaxpayer }) => {
     })
     const [items, setItems] = React.useState({})
     const { enqueueSnackbar } = useSnackbar();
-
     const handleOnChange = (e) => {
         if (e.currentTarget.value) {
             const value = e.currentTarget.value;
@@ -167,15 +167,30 @@ const CubicleList = ({ initialValues, createButton, showTaxpayer }) => {
                         fullWidth
                     />
                 </Box>
-                {(createButton) && (
-                    <Box>
+                <Box sx={{
+                    display: 'flex',
+                    height: '2rem',
+                    width: '8rem',
+                    justifyContent: !createButton ? 'end' : 'space-between',
+                }}>
+                    {total && (
+                        <PrintButton
+                            perPage={10}
+                            filter={filter}
+                            basePath='/cubicles'
+                            filename='cubiculos.pdf'
+                            type='pdf'
+                            title={title}
+                        />
+                    )}
+                    {(createButton) && (
                         <ButtonLink
                             color="primary"
                             variant="contained"
                             to={`/cubicles/${initialValues.taxpayer_id}/create`}
                         />
-                    </Box>
-                )}
+                    )}
+                </Box>
             </Box>
             <Table
                 headCells={headCells}

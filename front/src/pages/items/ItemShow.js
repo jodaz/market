@@ -64,9 +64,12 @@ const CubicleShow = () => {
                 </Box>
             </Box>
             <Box sx={{ fontWeight: 700, margin: '1rem 0', textTransform: 'uppercase', fontSize: '1.25rem' }}>Cubículos</Box>
-            <CubicleList initialValues={{
-                item_id: id
-            }} />
+            <CubicleList
+                initialValues={{
+                    item_id: id,
+                }} 
+                title={`Cubículos en el rubro "${record.name}"`}
+            />
         </Box>
     )
 }

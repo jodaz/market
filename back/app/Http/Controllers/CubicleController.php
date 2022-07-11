@@ -6,6 +6,7 @@ use App\Models\Cubicle;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use Auth;
+use PDF;
 
 class CubicleController extends Controller
 {
@@ -44,17 +45,17 @@ class CubicleController extends Controller
         }
 
         if ($request->type == 'pdf') {
-            return $this->report($query);
+            return $this->report($query, $request);
         }
 
         return $query->paginate($results);
     }
 
-    public function report($query)
+    public function report($query, $request)
     {
         // Prepare pdf
         $models = $query->get();
-        $title = "Padrón de cubículos";
+        $title = $request->has('title') ? $request->title : 'Padrón de cubículos';
 
         $pdf = PDF::LoadView('pdf.reports.cubicles', compact([
             'models',

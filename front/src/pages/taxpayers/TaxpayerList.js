@@ -11,6 +11,7 @@ import LinkIconButton from '../../components/LinkIconButton';
 import TableCell from '@mui/material/TableCell';
 import TableRow from '@mui/material/TableRow';
 import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
+import PrintButton from '../../components/DownloadButton';
 
 const headCells = [
     { 
@@ -127,7 +128,21 @@ const TaxpayerList = () => {
                         fullWidth
                     />
                 </Box>
-                <Box>
+                <Box sx={{
+                    display: 'flex',
+                    height: '2rem',
+                    width: '8rem',
+                    justifyContent: 'space-between',
+                }}>
+                    {total && (
+                        <PrintButton
+                            perPage={10}
+                            filter={filter}
+                            basePath='/taxpayers'
+                            filename='contribuyentes.pdf'
+                            type='pdf'
+                        />
+                    )}
                     <ButtonLink
                         color="primary"
                         variant="contained"
