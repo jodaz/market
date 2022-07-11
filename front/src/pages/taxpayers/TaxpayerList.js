@@ -134,7 +134,7 @@ const TaxpayerList = () => {
                     width: '8rem',
                     justifyContent: 'space-between',
                 }}>
-                    {total && (
+                    {items.length ? (
                         <PrintButton
                             perPage={10}
                             filter={filter}
@@ -142,7 +142,7 @@ const TaxpayerList = () => {
                             filename='contribuyentes.pdf'
                             type='pdf'
                         />
-                    )}
+                    ) : <></>}
                     <ButtonLink
                         color="primary"
                         variant="contained"

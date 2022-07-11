@@ -2,7 +2,7 @@ import * as React from 'react'
 import Box from '@mui/material/Box'
 import TextField from '@mui/material/TextField'
 import SearchIcon from '@mui/icons-material/Search';
-import { useMediaQuery } from '@mui/material'
+import { Grid, useMediaQuery } from '@mui/material'
 import useFetch from '../../hooks/useFetch'
 import Table from '../../components/Table'
 import ButtonLink from '../../components/ButtonLink'
@@ -14,6 +14,12 @@ import DeleteButton from '../../components/DeleteButton'
 import { useSnackbar } from 'notistack';
 import axios from '../../api'
 import PrintButton from '../../components/DownloadButton';
+import Autocomplete from '@mui/material/Autocomplete';
+
+const options = [
+    { 'label': 'Activo', value: 1 },
+    { 'label': 'Inactivo', value: 0 }
+]
 
 const headCells = [
     { 
@@ -67,6 +73,13 @@ const CubicleList = ({ initialValues, createButton, title = 'Padrón de cubícul
             const value = e.currentTarget.value;
 
             setFilter(prevState => ({ ...prevState, address: value }))
+        } else {
+            setFilter(initialValues)
+        }
+    }
+    const onSelectInputChange = (e, newInputValue) => {
+        if (newInputValue) {
+            setFilter(prevState => ({ ...prevState, active: newInputValue.value }))
         } else {
             setFilter(initialValues)
         }
@@ -153,27 +166,44 @@ const CubicleList = ({ initialValues, createButton, title = 'Padrón de cubícul
     return (
         <ListContainer title="Cubículos">
             <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
-                <Box width={isSmall ? '100%' : '40%'} backgroundColor='#fff'>
-                    <TextField
-                        onChange={handleOnChange}
-                        InputProps={{
-                            startAdornment: (
-                                <Box marginLeft='6px' display='flex'>
-                                    <SearchIcon />
-                                </Box>
-                            )
-                        }}
-                        placeholder='Buscar'
-                        fullWidth
-                    />
+                <Box sx={{
+                    width: isSmall ? '100%' : '60%',
+                    backgroundColor: '#fff'
+                }}>
+                    <Grid container spacing={2}>
+                        <Grid item sm={6}>
+                            <TextField
+                                onChange={handleOnChange}
+                                InputProps={{
+                                    startAdornment: (
+                                        <Box marginLeft='6px' display='flex'>
+                                            <SearchIcon />
+                                        </Box>
+                                    )
+                                }}
+                                placeholder='Buscar'
+                                fullWidth
+                            />
+                        </Grid>
+                        <Grid item sm={6}>
+                            <Autocomplete 
+                                disablePortal
+                                options={options}
+                                fullWidth
+                                renderInput={(params) => <TextField {...params} label="Estado" />}
+                                onChange={onSelectInputChange}
+                            />
+                        </Grid>
+                    </Grid>
                 </Box>
                 <Box sx={{
                     display: 'flex',
                     height: '2rem',
                     width: '8rem',
                     justifyContent: !createButton ? 'end' : 'space-between',
+                    alignContent: 'center'
                 }}>
-                    {total && (
+                    {items.length ? (
                         <PrintButton
                             perPage={10}
                             filter={filter}
@@ -182,7 +212,7 @@ const CubicleList = ({ initialValues, createButton, title = 'Padrón de cubícul
                             type='pdf'
                             title={title}
                         />
-                    )}
+                    ) : <></>}
                     {(createButton) && (
                         <ButtonLink
                             color="primary"

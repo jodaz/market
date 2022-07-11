@@ -137,7 +137,7 @@ const ItemList = () => {
                     width: '8rem',
                     justifyContent: 'space-between',
                 }}>
-                    {total && (
+                    {items.length ? (
                         <PrintButton
                             perPage={10}
                             filter={filter}
@@ -145,7 +145,7 @@ const ItemList = () => {
                             filename='rubros.pdf'
                             type='pdf'
                         />
-                    )}
+                    ) : <></>}
                     <ButtonLink
                         color="primary"
                         variant="contained"
