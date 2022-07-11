@@ -2,7 +2,7 @@ const getQueryFromParams = ({
     perPage, page, sort, filter, type = null
 }) => {
     const query = {
-        page: page + (-1),
+        page: page + 1,
         perPage: perPage
     }
 

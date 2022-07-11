@@ -12,6 +12,7 @@ import TableCell from '@mui/material/TableCell';
 import TableRow from '@mui/material/TableRow';
 import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
 import PrintButton from '../../components/DownloadButton';
+import { useAdmin } from '../../context/AdminContext'
 
 const headCells = [
     { 
@@ -42,13 +43,14 @@ const headCells = [
 ];
 
 const TaxpayerList = () => {
+    const { state: { perPage, page } } = useAdmin()
     const isSmall = useMediaQuery(theme =>
         theme.breakpoints.down('sm')
     )
     const [filter, setFilter] = React.useState({})
     const { loading, total, data } = useFetch('/taxpayers', {
-        perPage: 10,
-        page: 1,
+        perPage: perPage,
+        page: page,
         filter: filter
     })
     const [items, setItems] = React.useState({})

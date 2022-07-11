@@ -3,7 +3,11 @@ import * as React from 'react'
 const AdminContext = React.createContext()
 
 const initialState = {
-    title: `${process.env.REACT_APP_NAME}`
+    title: `${process.env.REACT_APP_NAME}`,
+    page: 0,
+    perPage: 5,
+    filter: {},
+    sort: { field: 'id', order: 'desc' }
 }
 
 function adminReducer(state, action) {
@@ -13,6 +17,18 @@ function adminReducer(state, action) {
                 return {
                     ...state,
                     title: action.payload
+                }
+            }
+            case 'SET_PER_PAGE': {
+                return {
+                    ...state,
+                    perPage: action.payload
+                }
+            }
+            case 'SET_PAGE': {
+                return {
+                    ...state,
+                    page: action.payload
                 }
             }
             case 'RESET_ADMIN': {
@@ -43,8 +59,16 @@ function useAdmin() {
     return context
 }
 
+function setPerPage(dispatch, perPage) {
+    dispatch({ type: 'SET_PER_PAGE', payload: perPage })
+}
+
+function setPage(dispatch, page) {
+    dispatch({ type: 'SET_PAGE', payload: page })
+}
+
 function setTitle(dispatch, title) {
     dispatch({ type: 'SET_TITLE', payload: title })
 }
 
-export { useAdmin, AdminProvider, setTitle }
+export { useAdmin, AdminProvider, setTitle, setPage, setPerPage }

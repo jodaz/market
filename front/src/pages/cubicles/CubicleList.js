@@ -15,6 +15,7 @@ import { useSnackbar } from 'notistack';
 import axios from '../../api'
 import PrintButton from '../../components/DownloadButton';
 import Autocomplete from '@mui/material/Autocomplete';
+import { useAdmin } from '../../context/AdminContext'
 
 const options = [
     { 'label': 'Activo', value: 1 },
@@ -61,9 +62,10 @@ const CubicleList = ({ initialValues, createButton, title = 'Padrón de cubícul
         theme.breakpoints.down('sm')
     )
     const [filter, setFilter] = React.useState(initialValues)
+    const { state: { perPage, page } } = useAdmin()
     const { loading, total, data } = useFetch('/cubicles', {
-        perPage: 10,
-        page: 1,
+        perPage: perPage,
+        page: page,
         filter: filter
     })
     const [items, setItems] = React.useState({})

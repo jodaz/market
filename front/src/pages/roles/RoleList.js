@@ -13,6 +13,7 @@ import TableRow from '@mui/material/TableRow';
 import DeleteButton from '../../components/DeleteButton'
 import { useSnackbar } from 'notistack';
 import axios from '../../api'
+import { useAdmin } from '../../context/AdminContext'
 
 const headCells = [
     { 
@@ -33,10 +34,11 @@ const RoleList = () => {
     const isSmall = useMediaQuery(theme =>
         theme.breakpoints.down('sm')
     )
+    const { state: { perPage, page } } = useAdmin()
     const [filter, setFilter] = React.useState({})
     const { loading, total, data } = useFetch('/roles', {
-        perPage: 10,
-        page: 1,
+        perPage: perPage,
+        page: page,
         filter: filter
     })
     const [items, setItems] = React.useState({})
