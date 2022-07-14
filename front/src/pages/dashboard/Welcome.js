@@ -1,6 +1,7 @@
 import Box from '@mui/material/Box'
 import dtiLogo from '../../images/DTI2.png'
 import mayorLogo from '../../images/mayorLogo.png'
+import sumatLogo from '../../images/sumat.png'
 
 const Strong = ({ children }) => (
     <Box component='span' sx={{
@@ -31,8 +32,8 @@ const Welcome = () => {
                 justifyContent: 'space-between',
                 flexDirection: 'row'
             }}>
-                <img height='50rem' src={dtiLogo} />
                 <img height='75rem' src={mayorLogo} />
+                <img height='75rem' src={sumatLogo} />
             </Box>
         </Box>
     )
