@@ -30,10 +30,12 @@ const Welcome = () => {
                 width: '40%',
                 display: 'flex',
                 justifyContent: 'space-between',
-                flexDirection: 'row'
+                flexDirection: 'row',
+                alignItems: 'center'
             }}>
                 <img height='75rem' src={mayorLogo} />
                 <img height='75rem' src={sumatLogo} />
+                <img height='50rem' src={dtiLogo} />
             </Box>
         </Box>
     )
