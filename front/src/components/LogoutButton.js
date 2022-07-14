@@ -19,7 +19,6 @@ export default function LogoutButton() {
         } catch (e) {
             console.log(e)
         }
-
     }, [])
 
     return (

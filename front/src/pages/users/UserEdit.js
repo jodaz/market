@@ -20,7 +20,13 @@ const UserEdit = () => {
 
     const save = React.useCallback(async values => {
         try {
-            const { data } = await axios.put(`/users/${id}`, values)
+            const { roles, ...rest } = values;
+            const rolesIDs = (typeof roles[0] == 'number') ? roles : roles.map(({ id }) => id);
+
+            const { data } = await axios.put(`/users/${id}`, {
+                ...rest,
+                roles: rolesIDs
+            })
 
             if (data) {
                 navigate('/users')

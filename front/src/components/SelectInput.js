@@ -17,7 +17,7 @@ const ControllableSelectInput = props => {
     } = props;
     const [defaultValue] = React.useState((() => {
         if (multiple && value.length && options.length) {
-            return value.filter(item => options.indexOf(item))
+            return value.filter(item => options.indexOf(item));
         } else if (!multiple && value && options.length) {
             return options.find(item => item.id == value);
         } else {

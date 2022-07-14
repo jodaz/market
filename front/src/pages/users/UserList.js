@@ -43,7 +43,7 @@ const headCells = [
     }
 ];
 
-const ItemList = () => {
+const UserList = () => {
     const { state: { perPage, page } } = useAdmin()
     const isSmall = useMediaQuery(theme =>
         theme.breakpoints.down('sm')
@@ -118,11 +118,11 @@ const ItemList = () => {
                     align='right'
                     width='10%'
                 >
-                    <Box display="flex" justifyContent={'center'}>
+                    <Box display="flex" justifyContent='center'>
                         <LinkIconButton href={`/users/${row.id}/edit`} />
                         {(row.id != user.id) && (
                             <BlockButton
-                                title={`¿Está seguro que desea desactivar el usuari "${row.login}"?`}
+                                title={`¿Está seguro que desea desactivar el usuario "${row.login}"?`}
                                 onClick={() => handleUpdateStatus(row)}
                                 active={row.active}
                             />
@@ -172,4 +172,4 @@ const ItemList = () => {
     )
 }
 
-export default ItemList
+export default UserList

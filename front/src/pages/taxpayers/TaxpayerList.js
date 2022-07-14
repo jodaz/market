@@ -138,7 +138,6 @@ const TaxpayerList = () => {
                 }}>
                     {items.length ? (
                         <PrintButton
-                            perPage={10}
                             filter={filter}
                             basePath='/taxpayers'
                             filename='contribuyentes.pdf'
